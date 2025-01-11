@@ -1,0 +1,116 @@
+﻿@model IEnumerable<MyLibrary.Data.DTOS.CartDTOs.CartItemViewModel>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Your Cart</title>
+    <link rel="stylesheet" href="~/css/CartPage.css"/>
+</head>
+<body>
+<header>
+    <div class="logo">LibraryOfBooks</div>
+    <nav>
+        <a asp-action="ProfilePage" asp-controller="Users">Profile Page</a>
+        <a asp-action="Index" asp-controller="Users">Home</a>
+        <a asp-action="MyBooks" asp-controller="Users">MyBooks</a>
+        <a asp-action="LogIn" asp-controller="Users">Logout</a>
+    </nav>
+</header>
+
+<main>
+    <h1>Your Cart</h1>
+    <div class="cart-container" id="cartContainer">
+        @foreach (var item in Model)
+        {
+            <div class="cart-item" data-id="@item.Id">
+                <!-- Instead of "Book ID," show the Book Title -->
+                <p><strong>Title:</strong> @item.Title</p>
+                <p><strong>Author:</strong> @item.Author</p>
+
+                <!-- Distinguish between rent & buy -->
+                @if (item.IsForRent)
+                {
+                    <p>Rent Days: @item.RentDays</p>
+                }
+                else
+                {
+                    <p>Buy Quantity: @item.BuyQuantity</p>
+                }
+
+                <button class="remove-button" onclick="removeItem('@item.Id')">
+                    Remove
+                </button>
+            </div>
+        }
+    </div>
+
+    <div class="checkout-container">
+        <button class="checkout-button" onclick="checkout()">Pay Now!</button>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2025 LibraryOfBooks. All rights reserved.</p>
+</footer>
+
+<script>
+    function removeItem(cartItemId) {
+        fetch('/Cart/RemoveCartItem', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ cartItemId })
+        })
+            .then(r => r.json())
+            .then(res => {
+                if (res.success) {
+                    alert("Item removed.");
+                    location.reload();
+                } else {
+                    alert("Failed to remove item: " + res.message);
+                }
+            })
+            .catch(err => console.error(err));
+    }
+
+    function checkout() {
+        window.location.href = '/Order/Checkout';
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        logOut();
+    });
+
+    function logOut() {
+        document.getElementById("logout-link").addEventListener("click", async (event) => {
+            event.preventDefault();
+            const tokenElement = document.querySelector('input[name="__RequestVerificationToken"]');
+            if (!tokenElement) {
+                console.error("Anti-Forgery Token not found.");
+                return;
+            }
+            try {
+                const antiForgeryToken = tokenElement.value;
+                const response = await fetch("/Users/LogOut", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "RequestVerificationToken": antiForgeryToken
+                    }
+                });
+                if (response.ok) {
+                    localStorage.clear();
+                    window.location.href = "/Users/LogIn";
+                } else {
+                    alert("Logout failed. Try again.");
+                }
+            } catch (error) {
+                console.error("Logout error:", error);
+                alert("Error occurred while logging out.");
+            }
+        });
+    }
+
+</script>
+</body>
+</html>

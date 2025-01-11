@@ -1,0 +1,170 @@
+﻿/* General Styles */
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #2c2c2c;
+    color: #e0e0e0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Header */
+header {
+    position: sticky; /* Or 'fixed' depending on your choice */
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: #202020;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #ff6600;
+    text-shadow: 0 0 8px #ff6600;
+}
+
+nav a {
+    margin-left: 1.5rem;
+    color: #e0e0e0;
+    font-size: 1rem;
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+    nav a:hover {
+        color: #ff6600;
+        text-shadow: 0 0 5px #ff6600;
+    }
+
+/* Profile Container */
+.profile-container {
+    max-width: 800px;
+    margin: 3rem auto;
+    background: #1f1f1f;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 12px #000;
+    text-align: center;
+}
+
+.profile-card img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #000;
+    margin-bottom: 1rem;
+}
+
+.profile-card h1 {
+    font-size: 2rem;
+    color: #ff6600;
+    margin-bottom: 1rem;
+}
+
+.profile-card p {
+    font-size: 1rem;
+    color: #e0e0e0;
+    margin: 0.5rem 0;
+}
+
+.edit-button {
+    padding: 0.8rem 1.5rem;
+    background: #ff6600;
+    border: none;
+    border-radius: 5px;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 12px #ff6600;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+    .edit-button:hover {
+        background: #cc5200;
+        box-shadow: 0 0 15px #cc5200;
+    }
+
+/* Edit Profile */
+.profile-card h2 {
+    font-size: 1.8rem;
+    color: #ff6600;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #e0e0e0;
+    font-size: 1rem;
+}
+
+input {
+    width: 100%;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 5px;
+    background: #333;
+    color: #fff;
+    box-shadow: 0 0 8px #000;
+    font-size: 1rem;
+}
+
+    input::placeholder {
+        color: #aaa;
+    }
+
+.save-button {
+    padding: 0.8rem 1.5rem;
+    background: #ff6600;
+    border: none;
+    border-radius: 5px;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 12px #ff6600;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+    .save-button:hover {
+        background: #cc5200;
+        box-shadow: 0 0 15px #cc5200;
+    }
+
+.cancel-button {
+    padding: 0.8rem 1.5rem;
+    background: #333;
+    border: none;
+    border-radius: 5px;
+    color: #e0e0e0;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 8px #000;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+    .cancel-button:hover {
+        background: #444;
+        box-shadow: 0 0 12px #444;
+    }
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 1.5rem;
+    background: #202020;
+    border-top: 2px solid #333;
+    color: #e0e0e0;
+    font-size: 1rem;
+}

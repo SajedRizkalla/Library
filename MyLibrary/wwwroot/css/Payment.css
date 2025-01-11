@@ -1,0 +1,129 @@
+﻿/* CSS for Payment Page */
+
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #2c2c2c;
+    color: #e0e0e0;
+}
+
+header {
+    position: sticky; /* Or 'fixed' depending on your choice */
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: #202020;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #ff6600;
+    text-shadow: 0 0 8px #ff6600;
+    position: absolute;
+    left: 2rem;
+}
+
+nav {
+    display: flex;
+    gap: 1.5rem;
+}
+
+    nav a {
+        text-decoration: none;
+        color: #e0e0e0;
+        font-size: 1rem;
+        transition: color 0.3s, text-shadow 0.3s;
+    }
+
+        nav a:hover {
+            color: #ff6600;
+            text-shadow: 0 0 5px #ff6600;
+        }
+
+main {
+    padding: 2rem;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #ff6600;
+    margin-bottom: 2rem;
+}
+
+.payment-container {
+    max-width: 500px;
+    margin: 0 auto;
+    background: #1f1f1f;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 12px #000;
+}
+
+form {
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    color: #e0e0e0;
+}
+
+input {
+    width: 100%;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 5px;
+    background: #333;
+    color: #fff;
+    box-shadow: 0 0 8px #000;
+    font-size: 1rem;
+}
+
+    input::placeholder {
+        color: #aaa;
+    }
+
+.form-row {
+    display: flex;
+    gap: 1rem;
+}
+
+button {
+    padding: 0.8rem 1.5rem;
+    background: #ff6600;
+    border: none;
+    border-radius: 5px;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 12px #ff6600;
+    transition: background 0.3s, box-shadow 0.3s;
+    font-size: 1rem;
+}
+
+    button:hover {
+        background: #cc5200;
+        box-shadow: 0 0 15px #cc5200;
+    }
+
+footer {
+    padding: 1rem;
+    background: #202020;
+    text-align: center;
+    color: #e0e0e0;
+    font-size: 1rem;
+    border-top: 2px solid #333;
+    margin-top: 2rem;
+}

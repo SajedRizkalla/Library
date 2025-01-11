@@ -1,0 +1,81 @@
+[
+  {
+    "ContainingType": "MyLibrary.Controllers.APIController",
+    "Method": "GetAllUsers",
+    "RelativePath": "api/API",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MyLibrary.Controllers.APIController",
+    "Method": "AddUser",
+    "RelativePath": "api/API",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "user",
+        "Type": "MyLibrary.Data.User",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MyLibrary.Controllers.APIController",
+    "Method": "GetUserById",
+    "RelativePath": "api/API/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MyLibrary.Controllers.APIController",
+    "Method": "UpdateUser",
+    "RelativePath": "api/API/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "updatedUser",
+        "Type": "MyLibrary.Data.User",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MyLibrary.Controllers.APIController",
+    "Method": "DeleteUser",
+    "RelativePath": "api/API/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

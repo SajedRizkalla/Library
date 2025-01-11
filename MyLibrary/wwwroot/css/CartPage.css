@@ -1,0 +1,201 @@
+﻿/* CSS for Cart/Shop Page */
+
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #2c2c2c;
+    color: #e0e0e0;
+}
+
+header {
+    position: sticky; /* Or 'fixed' depending on your choice */
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: #202020;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #ff6600;
+    text-shadow: 0 0 8px #ff6600;
+    position: absolute;
+    left: 2rem;
+}
+
+nav {
+    display: flex;
+    gap: 1.5rem;
+}
+
+    nav a {
+        text-decoration: none;
+        color: #e0e0e0;
+        font-size: 1rem;
+        transition: color 0.3s, text-shadow 0.3s;
+    }
+
+        nav a:hover {
+            color: #ff6600;
+            text-shadow: 0 0 5px #ff6600;
+        }
+
+main {
+    padding: 2rem;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #ff6600;
+    margin-bottom: 2rem;
+}
+
+.cart-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    background: #1f1f1f;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 0 12px #000;
+}
+
+    .cart-item img {
+        width: 100px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 5px;
+        margin-right: 1rem;
+        box-shadow: 0 0 8px #000;
+    }
+
+.details {
+    flex: 1;
+    text-align: left;
+}
+
+    .details h2 {
+        font-size: 1.5rem;
+        color: #ff6600;
+        margin-bottom: 0.5rem;
+    }
+
+    .details p {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+    }
+
+.options button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    background: #ff6600;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 12px #ff6600;
+    transition: background 0.3s, box-shadow 0.3s;
+    margin-right: 0.5rem;
+}
+
+    .options button:hover {
+        background: #cc5200;
+        box-shadow: 0 0 15px #cc5200;
+    }
+
+.remove-button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    background: #cc0000;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 12px #cc0000;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+    .remove-button:hover {
+        background: #990000;
+        box-shadow: 0 0 15px #990000;
+    }
+
+.input-selector {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.input-label {
+    font-size: 1rem;
+}
+
+.input-field {
+    width: 60px;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 5px;
+    background: #333;
+    color: #fff;
+    box-shadow: 0 0 8px #000;
+    text-align: center;
+}
+
+.delete-button {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: #cc0000;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+    .delete-button:hover {
+        color: #ff0000;
+    }
+
+.checkout-container {
+    margin-top: 2rem;
+}
+
+.checkout-button {
+    padding: 1rem 2rem;
+    background: #ff6600;
+    border: none;
+    border-radius: 5px;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 12px #ff6600;
+    transition: background 0.3s, box-shadow 0.3s;
+    font-size: 1.2rem;
+}
+
+    .checkout-button:hover {
+        background: #cc5200;
+        box-shadow: 0 0 15px #cc5200;
+    }
+
+footer {
+    padding: 1rem;
+    background: #202020;
+    text-align: center;
+    color: #e0e0e0;
+    font-size: 1rem;
+    border-top: 2px solid #333;
+    margin-top: 2rem;
+}

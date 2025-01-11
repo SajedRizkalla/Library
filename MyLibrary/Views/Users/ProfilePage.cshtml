@@ -1,0 +1,148 @@
+﻿@model MyLibrary.Data.DTOS.UserDTOs.EditRequest
+
+@{
+    ViewData["Title"] = "Profile Page";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <link rel="stylesheet" href="~/css/profile.css">
+    <script>
+        function enableEditMode() {
+            document.getElementById("profile-view").style.display = "none";
+            document.getElementById("profile-edit").style.display = "block";
+        }
+
+        function cancelEditMode() {
+            document.getElementById("profile-view").style.display = "block";
+            document.getElementById("profile-edit").style.display = "none";
+        }
+    </script>
+</head>
+<body>
+<header>
+    <div class="logo">LibraryOfBooks</div>
+    <nav id="navigation-links">
+        <!-- Links will be dynamically rendered -->
+    </nav>
+    <form id="antiForgeryForm" method="post" style="display: none;">
+        @Html.AntiForgeryToken()
+    </form>
+</header>
+
+<div class="profile-container">
+    <div class="profile-card">
+        <!-- View Mode -->
+        <div id="profile-view">
+            <img src="~/images/profile.jpg" alt="Profile Picture">
+            <h1>@Model.Username</h1>
+            <p><strong>Username:</strong> @Model.Username</p>
+            <p><strong>Email:</strong> @Model.Email</p>
+            @* <p><strong>Password:</strong> @Model.Password</p> *@
+            <p><strong>Gender:</strong> @Model.Gender</p>
+            <button class="edit-button" onclick="enableEditMode()">Edit Profile</button>
+        </div>
+
+        <!-- Edit Mode -->
+        <div id="profile-edit" style="display: none;">
+            <form asp-action="EditProfile" asp-controller="Users" method="post">
+                <img src="~/images/profile.jpg" alt="Profile Picture">
+                <h2>Edit Profile</h2>
+                <div class="form-group">
+                    <label for="Username">Username:</label>
+                    <input asp-for="Username" class="form-control" id="Username" required/>
+                </div>
+                <div class="form-group">
+                    <label for="Email">Email:</label>
+                    <input asp-for="Email" type="email" class="form-control" id="Email" required/>
+                </div>
+                <div class="form-group">
+                    <label for="Password">Password:</label>
+                    <input asp-for="Password" type="password" class="form-control" id="Password"/>
+                </div>
+                <!-- Hidden field for OldUsername -->
+                <input type="hidden" asp-for="OldUsername" value="@Model.Username"/>
+                <div class="form-buttons">
+                    <button type="submit" class="save-button">Save Changes</button>
+                    <button type="button" class="cancel-button" onclick="cancelEditMode()">Cancel</button>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <p>&copy; 2024 LibraryOfBooks All rights reserved. </p>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const isAdmin = localStorage.getItem("isAdmin") === "true"; // Check if the user is an admin
+        const navLinks = document.getElementById("navigation-links");
+
+        // Populate navigation links dynamically
+        if (isAdmin) {
+            // If the user is an admin
+            navLinks.innerHTML = `
+        <a href="/Users/AdminMain">Admin Home</a>
+        <a href="/Users/Index">General Home</a>
+        <a href="/Cart/Index">Cart</a>
+        <a href="/Users/MyBooks">MyBooks</a>
+        <a href="#" id="logout-link">Logout</a>
+    `;
+        } else {
+            // If the user is not an admin
+            navLinks.innerHTML = `
+        <a href="/Users/Index">Home</a>
+        <a href="/Cart/Index">Cart</a>
+        <a href="/Users/MyBooks">MyBooks</a>
+        <a href="#" id="logout-link">Logout</a>
+    `;
+        }
+
+
+        // Attach logout event listener
+        document.getElementById("logout-link").addEventListener("click", async function (event) {
+            event.preventDefault();
+
+            const tokenElement = document.querySelector('input[name="__RequestVerificationToken"]');
+            if (!tokenElement) {
+                console.error("Anti-Forgery Token not found.");
+                return;
+            }
+
+            try {
+                const antiForgeryToken = tokenElement.value;
+
+                const response = await fetch("/Users/LogOut", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "RequestVerificationToken": antiForgeryToken
+                    }
+                });
+
+                if (response.ok) {
+                    // Clear local storage and redirect
+                    localStorage.clear();
+                    window.location.href = "/Users/LogIn";
+                } else {
+                    alert("Logout failed. Please try again.");
+                }
+            } catch (error) {
+                console.error("Error during logout:", error);
+                alert("An error occurred while logging out.");
+            }
+        });
+
+    });
+
+
+</script>
+</body>
+</html>

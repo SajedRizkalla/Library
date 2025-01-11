@@ -1,0 +1,426 @@
+﻿/* CSS for Admin Library Page */
+
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #2c2c2c;
+    color: #e0e0e0;
+}
+
+header {
+    position: sticky; /* Or 'fixed' depending on your choice */
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: #202020;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.genreType {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background: #333;
+    color: #fff;
+}
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #ff6600;
+    text-shadow: 0 0 8px #ff6600;
+}
+
+nav {
+    display: flex;
+    gap: 20px; /* Adds spacing between navigation links */
+    justify-content: flex-end; /* Align links to the right */
+    align-items: center; /* Vertically center the links */
+}
+
+nav a {
+    text-decoration: none;
+    color: #e0e0e0;
+    font-size: 1rem;
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+nav a:hover {
+    color: #ff6600;
+    text-shadow: 0 0 5px #ff6600;
+}
+
+.add-book-container {
+    position: fixed;
+    bottom: 50%;
+    right: 2rem;
+    transform: translateY(50%);
+    z-index: 1000;
+}
+
+.add-book-button {
+    background: #ff6600;
+    color: #000;
+    font-size: 2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    box-shadow: 0 0 12px #ff6600;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+    .add-book-button:hover {
+        background: #cc5200;
+        box-shadow: 0 0 15px #cc5200;
+    }
+
+.modal {
+    display: none; /* Initially hidden */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.modal-content {
+    background: #1f1f1f;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 800px;
+    max-height: 80%; /* Ensure it fits within the viewport */
+    overflow-y: auto; /* Enable scrolling when content exceeds height */
+    color: #e0e0e0;
+    box-shadow: 0 0 12px #000;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Arrange inputs in two columns */
+    gap: 1.5rem;
+}
+
+    .modal-content .form-section {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .modal-content label {
+        display: block;
+        color: #e0e0e0;
+    }
+
+    .modal-content input {
+        width: 100%;
+        padding: 0.8rem;
+        border: none;
+        border-radius: 5px;
+        margin-bottom: 1rem;
+        background: #333;
+        color: #fff;
+        box-shadow: 0 0 8px #000;
+    }
+
+    .modal-content button {
+        padding: 0.8rem 1.5rem;
+        background: #ff6600;
+        border: none;
+        border-radius: 8px;
+        color: #000;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 0 12px #ff6600;
+        transition: background 0.3s, box-shadow 0.3s;
+        grid-column: span 2;
+        justify-self: center;
+    }
+
+        .modal-content button:hover {
+            background: #cc5200;
+            box-shadow: 0 0 15px #cc5200;
+        }
+
+    .modal-content .preview-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: #292929;
+        border-radius: 10px;
+        padding: 1rem;
+        box-shadow: 0 0 12px #ff6600;
+        grid-column: span 2;
+    }
+
+        .modal-content .preview-section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+.hero {
+    text-align: center;
+    padding: 5rem 2rem;
+    background: linear-gradient(to bottom, #1a1a1a, #121212);
+    color: #fff;
+
+}
+
+    .hero h1 {
+        font-size: 3rem;
+        text-shadow: 0 0 12px #ff6600;
+        margin-bottom: 1.5rem;
+    }
+
+.search-bar {
+    margin: 3rem auto;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+    .search-bar input {
+        padding: 1rem;
+        font-size: 1rem;
+        border: none;
+        border-radius: 8px;
+        width: 50%;
+        background-color: #333;
+        color: #fff;
+        box-shadow: 0 0 8px #000;
+    }
+
+.search-button {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    background: #ff6600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #000;
+    font-weight: bold;
+    box-shadow: 0 0 12px #ff6600;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+    .search-button:hover {
+        background: #cc5200;
+        box-shadow: 0 0 15px #cc5200;
+    }
+
+.section {
+    padding: 3rem 1.5rem;
+}
+
+    .section h2 {
+        text-align: center;
+        margin-bottom: 2rem;
+        font-size: 2.5rem;
+        text-shadow: 0 0 12px #ff6600;
+    }
+
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    justify-items: center;
+}
+
+.book-item {
+    position: relative;
+    background: #1f1f1f;
+    padding: 1rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 12px #000;
+    transition: transform 0.3s, box-shadow 0.3s;
+    width: 100%;
+    max-width: 250px;
+}
+
+    .book-item:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px #ff6600;
+    }
+
+    .book-item img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+        margin-bottom: 1rem;
+    }
+
+    .book-item h3 {
+        font-size: 1.4rem;
+        color: #ff6600;
+    }
+
+    .book-item p {
+        font-size: 1.1rem;
+        margin: 0.5rem 0;
+        color: #e0e0e0;
+    }
+
+.add-to-cart {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    background: #ff6600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #000;
+    font-weight: bold;
+    box-shadow: 0 0 12px #ff6600;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+    .add-to-cart:hover {
+        background: #cc5200;
+        box-shadow: 0 0 15px #cc5200;
+    }
+
+.delete-book-button {
+    background: #ff0000;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+    .delete-book-button:hover {
+        background: #cc0000;
+    }
+
+.mat {
+    text-align: center;
+    padding: 1.5rem;
+    background: #202020;
+    border-top: 2px solid #333;
+    color: #e0e0e0;
+    font-size: 1rem;
+}
+
+.button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.button:hover {
+    opacity: 0.9;
+}
+
+.edit-button {
+    background-color: #3498db;
+    color: white;
+}
+
+.edit-button:hover {
+    background-color: #2980b9;
+}
+
+.download-button {
+    background-color: #2ecc71;
+    color: white;
+}
+
+.download-button:hover {
+    background-color: #27ae60;
+}
+
+.rent-button {
+    background-color: #f39c12;
+    color: white;
+}
+
+.rent-button:disabled {
+    background-color: #bdc3c7;
+    color: #7f8c8d;
+    cursor: not-allowed;
+}
+
+/* Buttons styling */
+.edit-book-button,
+.download-button,
+.delete-book-button {
+    display: inline-block;
+    margin: 5px;
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    color: #fff;
+}
+
+.edit-book-button {
+    background-color: #3498db; /* Blue color */
+}
+.edit-book-button:hover {
+    background-color: #2980b9;
+}
+
+.download-button {
+    background-color: #2ecc71; /* Green color */
+}
+.download-button:hover {
+    background-color: #27ae60;
+}
+
+.delete-book-button {
+    background-color: #e74c3c; /* Red color */
+}
+.delete-book-button:hover {
+    background-color: #c0392b;
+}
+
+/* Modal styling for reference (optional) */
+/*.modal {*/
+/*    display: none;*/
+/*    position: fixed;*/
+/*    z-index: 999;*/
+/*    left: 0;*/
+/*    top: 0;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    overflow: auto;*/
+/*    background-color: rgba(0,0,0,0.4);*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*}*/
+
+/*.modal-content {*/
+/*    !*background-color: #fff;*!*/
+/*    padding: 20px;*/
+/*    margin: auto;*/
+/*    border-radius: 5px;*/
+/*    width: 50%;*/
+/*}*/
+
+.close {
+    float: right;
+    font-size: 24px;
+    cursor: pointer;
+}

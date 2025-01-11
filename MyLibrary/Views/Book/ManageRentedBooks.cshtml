@@ -1,0 +1,247 @@
+﻿@model IEnumerable<MyLibrary.Data.RentedRecord>
+
+@{
+    ViewData["Title"] = "Manage Rented Books";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Rented Books</title>
+    <link rel="stylesheet" href="~/css/ManageRentedBooks.css">
+</head>
+<body>
+<header>
+    <div class="logo">LibraryOfBooks</div>
+    <nav>
+        <a asp-action="ProfilePage" asp-controller="Users">Profile Page</a>
+        <a asp-action="Index" asp-controller="Users">General Home</a>
+        <a asp-action="AdminMain" asp-controller="Users">Admin Home</a>
+        <a asp-action="ManageUsers" asp-controller="Users">Manage Users</a>
+        <a asp-action="LogIn" asp-controller="Users">Logout</a>
+
+    </nav>
+</header>
+
+<main>
+    <h1 class="page-title">Manage Rented Books</h1>
+
+    <div class="search-container">
+        <input type="text" id="searchQuery" class="search-bar" placeholder="Search rented records..." />
+    </div>
+
+    <table class="styled-table" id="rentedBooksTable">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Book ID</th>
+            <th>Username</th>
+            <th>Borrow Date</th>
+            <th>Due Date</th>
+            <th>Days Left</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var rr in Model)
+        {
+            var daysLeft = (rr.DueDate - DateTime.Now).TotalDays;
+            <tr data-bookid="@rr.BookId" data-username="@rr.Username">
+                <td>@rr.Id</td>
+                <td>@rr.BookId</td>
+                <td>@rr.Username</td>
+                <td>@rr.BorrowDate.ToString("yyyy-MM-dd")</td>
+                <td>@rr.DueDate.ToString("yyyy-MM-dd")</td>
+                <td class="@(daysLeft <= 5 ? "warning" : "normal")">
+                    @(daysLeft <= 0 ? "Time's up!" : $"{daysLeft:F0} days")
+                </td>
+                <td>
+                    <!-- Return Book -->
+                    <button
+                        onclick="returnBook('@rr.BookId', '@rr.Username')"
+                        class="return-button">
+                        Return
+                    </button>
+
+                    <!-- View Waiting List -->
+                    <button
+                        onclick="openWaitingListModal('@rr.BookId')"
+                        class="view-waiting-button">
+                        View Waiting List
+                    </button>
+
+                    <!-- Notify user if days <= 5 -->
+                    @if (daysLeft <= 5)
+                    {
+                        <button
+                            onclick="notifyDue('@rr.BookId','@rr.Username')"
+                            class="notify-button">
+                            Notify
+                        </button>
+                    }
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</main>
+
+<!-- Waiting List Modal -->
+<div id="waitingListModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeWaitingListModal()">&times;</span>
+        <h2>Waiting List</h2>
+        <div id="waitingListContainer">
+            <!-- We'll dynamically inject user details here -->
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2024 LibraryOfBooks. All rights reserved.</p>
+</footer>
+
+<script>
+    // 1. Real-time search
+    document.getElementById("searchQuery").addEventListener("input", function () {
+        const query = this.value.toLowerCase();
+        const rows = document.querySelectorAll("#rentedBooksTable tbody tr");
+
+        rows.forEach(row => {
+            const bookId = row.getAttribute("data-bookid").toLowerCase();
+            const username = row.getAttribute("data-username").toLowerCase();
+
+            if (bookId.includes(query) || username.includes(query)) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    });
+
+    // 2. Return Book logic (JSON-based)
+    function returnBook(bookId, username) {
+        const payload = { bookId, username };
+
+        fetch('/Borrow/ReturnBook', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    alert(data.message);
+                    location.reload(); // Refresh the page
+                } else {
+                    alert("Failed to return the book.");
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    // 3. View Waiting List logic
+    function openWaitingListModal(bookId) {
+        // Fetch waiting list details from server
+        fetch(`/Book/GetWaitingList?bookId=${bookId}`)
+            .then(response => response.json())
+            .then(result => {
+                if (!result.success) {
+                    alert(result.message || "Failed to fetch waiting list.");
+                    return;
+                }
+                // Build HTML
+                const container = document.getElementById("waitingListContainer");
+                container.innerHTML = ""; // clear old data
+
+                if (result.data.length === 0) {
+                    container.innerHTML = "<p>No users in waiting list.</p>";
+                } else {
+                    container.innerHTML = result.data.map(user => `
+                        <div class="waiting-user">
+                            <p><strong>Username:</strong> ${user.username}</p>
+                            <p><strong>Email:</strong> ${user.email}</p>
+                            <p><strong>Gender:</strong> ${user.gender}</p>
+                            <p><strong>Active:</strong> ${user.isActive}</p>
+                        </div>
+                    `).join("<hr/>");
+                }
+                // Show the modal
+                document.getElementById("waitingListModal").style.display = "flex";
+            })
+            .catch(error => console.error("Error fetching waiting list:", error));
+    }
+
+    function closeWaitingListModal() {
+        document.getElementById("waitingListModal").style.display = "none";
+    }
+
+    // 4. Notify user if daysLeft <= 5
+    function notifyDue(bookId, username) {
+        const payload = { bookId, username };
+
+        fetch('/Borrow/NotifyDue', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Reminder sent successfully.");
+                } else {
+                    alert(data.message || "Could not send reminder.");
+                }
+            })
+            .catch(error => console.error("Error notifying due:", error));
+    }
+
+    // 5. Close modal by clicking outside
+    window.onclick = function (event) {
+        const modal = document.getElementById("waitingListModal");
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    };
+    document.addEventListener("DOMContentLoaded", () => {
+        logOut();
+    });
+    function logOut() {
+        document.getElementById("logout-link").addEventListener("click", async (event) => {
+            event.preventDefault();
+            const tokenElement = document.querySelector('input[name="__RequestVerificationToken"]');
+            if (!tokenElement) {
+                console.error("Anti-Forgery Token not found.");
+                return;
+            }
+            try {
+                const antiForgeryToken = tokenElement.value;
+                const response = await fetch("/Users/LogOut", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "RequestVerificationToken": antiForgeryToken
+                    }
+                });
+                if (response.ok) {
+                    localStorage.clear();
+                    window.location.href = "/Users/LogIn";
+                } else {
+                    alert("Logout failed. Try again.");
+                }
+            } catch (error) {
+                console.error("Logout error:", error);
+                alert("Error occurred while logging out.");
+            }
+        });
+    }
+
+</script>
+</body>
+</html>

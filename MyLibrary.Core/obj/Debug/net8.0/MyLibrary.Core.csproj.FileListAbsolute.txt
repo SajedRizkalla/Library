@@ -1,0 +1,55 @@
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary.Core\bin\Debug\net8.0\MyLibrary.Core.deps.json
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary.Core\bin\Debug\net8.0\MyLibrary.Core.dll
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary.Core\bin\Debug\net8.0\MyLibrary.Core.pdb
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\MyLibrary.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\MyLibrary.Core.AssemblyInfoInputs.cache
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\MyLibrary.Core.AssemblyInfo.cs
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\MyLibrary.Core.csproj.CoreCompileInputs.cache
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\MyLibrary.Core.dll
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\refint\MyLibrary.Core.dll
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\MyLibrary.Core.pdb
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\ref\MyLibrary.Core.dll
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary.Core\bin\Debug\net8.0\MyLibrary.Core.deps.json
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary.Core\bin\Debug\net8.0\MyLibrary.Core.dll
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary.Core\bin\Debug\net8.0\MyLibrary.Core.pdb
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\MyLibrary.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\MyLibrary.Core.AssemblyInfoInputs.cache
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\MyLibrary.Core.AssemblyInfo.cs
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\MyLibrary.Core.csproj.CoreCompileInputs.cache
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\MyLibrary.Core.dll
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\refint\MyLibrary.Core.dll
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\MyLibrary.Core.pdb
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\ref\MyLibrary.Core.dll
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary\MyLibrary.Core\bin\Debug\net8.0\MyLibrary.Core.deps.json
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary\MyLibrary.Core\bin\Debug\net8.0\MyLibrary.Core.dll
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary\MyLibrary.Core\bin\Debug\net8.0\MyLibrary.Core.pdb
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\MyLibrary.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\MyLibrary.Core.AssemblyInfoInputs.cache
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\MyLibrary.Core.AssemblyInfo.cs
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\MyLibrary.Core.csproj.CoreCompileInputs.cache
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\MyLibrary.Core.dll
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\refint\MyLibrary.Core.dll
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\MyLibrary.Core.pdb
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\ref\MyLibrary.Core.dll
+C:\Users\fadi\Desktop\Projects\MyLibrary\MyLibrary.Core\bin\Debug\net8.0\MyLibrary.Core.deps.json
+C:\Users\fadi\Desktop\Projects\MyLibrary\MyLibrary.Core\bin\Debug\net8.0\MyLibrary.Core.dll
+C:\Users\fadi\Desktop\Projects\MyLibrary\MyLibrary.Core\bin\Debug\net8.0\MyLibrary.Core.pdb
+C:\Users\fadi\Desktop\Projects\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\MyLibrary.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\fadi\Desktop\Projects\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\MyLibrary.Core.AssemblyInfoInputs.cache
+C:\Users\fadi\Desktop\Projects\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\MyLibrary.Core.AssemblyInfo.cs
+C:\Users\fadi\Desktop\Projects\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\MyLibrary.Core.csproj.CoreCompileInputs.cache
+C:\Users\fadi\Desktop\Projects\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\MyLibrary.Core.dll
+C:\Users\fadi\Desktop\Projects\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\refint\MyLibrary.Core.dll
+C:\Users\fadi\Desktop\Projects\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\MyLibrary.Core.pdb
+C:\Users\fadi\Desktop\Projects\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\ref\MyLibrary.Core.dll
+C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Core\bin\Debug\net8.0\MyLibrary.Core.deps.json
+C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Core\bin\Debug\net8.0\MyLibrary.Core.dll
+C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Core\bin\Debug\net8.0\MyLibrary.Core.pdb
+C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\MyLibrary.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\MyLibrary.Core.AssemblyInfoInputs.cache
+C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\MyLibrary.Core.AssemblyInfo.cs
+C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\MyLibrary.Core.csproj.CoreCompileInputs.cache
+C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\MyLibrary.Core.dll
+C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\refint\MyLibrary.Core.dll
+C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\MyLibrary.Core.pdb
+C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\ref\MyLibrary.Core.dll

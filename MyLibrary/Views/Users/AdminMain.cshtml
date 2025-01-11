@@ -1,0 +1,824 @@
+﻿@{
+    ViewData["Title"] = "Admin Library Page";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Library Page</title>
+    <link rel="stylesheet" href="~/css/admin.css">
+    <style>
+        .edit-book-button,
+        .download-button,
+        .delete-book-button {
+            display: inline-block;
+            margin: 5px;
+            padding: 8px 12px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            color: #fff;
+        }
+
+        .edit-book-button {
+            background-color: #3498db;
+        }
+
+        .edit-book-button:hover {
+            background-color: #2980b9;
+        }
+
+        .download-button {
+            background-color: #2ecc71;
+        }
+
+        .download-button:hover {
+            background-color: #27ae60;
+        }
+
+        .delete-book-button {
+            background-color: #e74c3c;
+        }
+
+        .delete-book-button:hover {
+            background-color: #c0392b;
+        }
+
+        .close {
+            float: right;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Basic styling for your modals */
+        .modal {
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 20px;
+            max-width: 500px;
+            width: 90%;
+            margin: auto;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .modal-content2 {
+            background: black;
+            padding: 20px;
+            max-width: 500px;
+            width: 90%;
+            margin: auto;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        /* Additional button for adding a publisher */
+        .add-publisher-container {
+            text-align: left;
+            margin: 10px 0;
+        }
+        .add-publisher-button {
+            background-color: #9b59b6;
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+        .add-publisher-button:hover {
+            background-color: #8e44ad;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="logo">LibraryOfBooks</div>
+    <nav>
+        <a href="/Users/ProfilePage">Profile</a>
+        <a href="/Users/">Home</a>
+        <!-- Additional admin pages -->
+        <a href="/Users/ManageUsers">Manage Users</a>
+        <a href="/Book/ManageRentedBooks">Manage Rented Books</a>
+        <a href="#" id="logout-link">Logout</a>
+
+    </nav>
+    <form id="antiForgeryForm" method="post" style="display:none;">
+        @Html.AntiForgeryToken()
+    </form>
+</header>
+
+<!-- Add Book Button -->
+<div class="add-book-container">
+    <button class="add-book-button" onclick="openAddBookModal()">+</button>
+</div>
+
+<!-- Add Publisher Button -->
+<div class="add-publisher-container">
+    <button class="add-publisher-button" onclick="openAddPublisherModal()">Add New Publisher</button>
+</div>
+
+<!-- Add Book Modal -->
+<div id="addBookModal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <span class="close" onclick="closeAddBookModal()">&times;</span>
+        <h2>Add New Book</h2>
+        <form id="addBookForm">
+            <label>Book ID:</label>
+            <input type="text" id="bookId" name="Id" required/>
+
+            <label>Cover URL:</label>
+            <input type="text" id="bookCover" name="Cover" required/>
+
+            <label>Author:</label>
+            <input type="text" id="bookAuthor" name="Author" required/>
+
+            <label>Title:</label>
+            <input type="text" id="bookTitle" name="Title" required/>
+
+            <label>Publisher:</label>
+            <input type="text" id="bookPublisher" name="Publisher" required/>
+
+            <label>Genre:</label>
+            <select id="addGenreSelect">
+                <option value="">Select a type</option>
+                <option value="horror">Horror</option>
+                <option value="comedy">Comedy</option>
+                <option value="drama">Drama</option>
+            </select>
+
+            <label>Sell Quantity:</label>
+            <input type="number" id="sellQuantity" name="SellQuantity" required/>
+
+            <label>Rent Quantity:</label>
+            <input type="number" id="rentQuantity" name="RentQuantity" value="3" disabled required/>
+
+            <label>Borrow Price:</label>
+            <input type="number" step="0.01" id="bookBorrowprice" name="Borrowprice" required/>
+
+            <label>Buy Price:</label>
+            <input type="number" step="0.01" id="bookBuyprice" name="Buyprice" required/>
+
+            <label>Year:</label>
+            <input type="number" id="bookYear" name="Year" required/>
+
+            <label>Sale %:</label>
+            <input type="number" step="0.01" id="salePercentage" name="SalePercentage"/>
+
+            <label>Sale End Date (max 7 days from now):</label>
+            <input type="datetime-local" id="saleEndDate" name="SaleEndDate"/>
+
+            <label>
+                Buy-Only (no borrowing)
+            </label>
+            <input type="checkbox" id="isJustForSell" name="IsJustForSell"/>
+
+            <label>Minimum Age Required:</label>
+            <input type="number" id="ageLimit" name="AgeLimit" min="0" value="0"/>
+
+            <label>Download URL:</label>
+            <input type="text" id="downloadUrl" name="DownloadUrl" placeholder="https://example.com/book.pdf"/>
+
+            <button type="button" onclick="submitBookForm()">Add Book</button>
+        </form>
+    </div>
+</div>
+
+<!-- Add New Publisher Modal -->
+<div id="addPublisherModal" class="modal" style="display:none;">
+    <div class="modal-content" style="background: black !important;">
+        <span class="close" onclick="closeAddPublisherModal()">&times;</span>
+        <h2>Add New Publisher (Create New Book Record)</h2>
+
+        <!-- Step 1: Search for existing book by ID -->
+        <div>
+            <label for="existingBookSearch">Enter Existing Book ID:</label>
+            <input type="text" id="existingBookSearch" placeholder="e.g., book ID" />
+            <button type="button" onclick="fetchExistingBook()">Fetch Book</button>
+        </div>
+
+        <hr/>
+
+        <!-- Step 2: The form is hidden until we fetch the book successfully -->
+        <div id="publisherFormSection" style="display:none;">
+            <form id="addPublisherForm">
+                <label>Book ID (new unique ID):</label>
+                <input type="text" id="newPublisherBookId" name="Id" required/>
+
+                <label>Cover URL:</label>
+                <input type="text" id="newPublisherCover" name="Cover" required/>
+
+                <label>Author:</label>
+                <input type="text" id="newPublisherAuthor" name="Author" required/>
+
+                <label>Title:</label>
+                <input type="text" id="newPublisherTitle" name="Title" required/>
+
+                <!-- The main difference: let the user specify a new publisher -->
+                <label>Publisher:</label>
+                <input type="text" id="newPublisherPublisher" name="Publisher" required/>
+
+                <label>Genre:</label>
+                <select id="newPublisherGenreSelect">
+                    <option value="">Select a type</option>
+                    <option value="horror">Horror</option>
+                    <option value="comedy">Comedy</option>
+                    <option value="drama">Drama</option>
+                </select>
+
+                <label>Sell Quantity:</label>
+                <input type="number" id="newPublisherSellQuantity" name="SellQuantity" required/>
+
+                <label>Rent Quantity:</label>
+                <input type="number" id="newPublisherRentQuantity" name="RentQuantity" required/>
+
+                <label>Borrow Price:</label>
+                <input type="number" step="0.01" id="newPublisherBorrowPrice" name="Borrowprice" required/>
+
+                <label>Buy Price:</label>
+                <input type="number" step="0.01" id="newPublisherBuyPrice" name="Buyprice" required/>
+
+                <label>Year:</label>
+                <input type="number" id="newPublisherYear" name="Year" required/>
+
+                <label>Sale %:</label>
+                <input type="number" step="0.01" id="newPublisherSalePercentage" name="SalePercentage"/>
+
+                <label>Sale End Date (max 7 days from now):</label>
+                <input type="datetime-local" id="newPublisherSaleEndDate" name="SaleEndDate"/>
+
+                <label>Buy-Only (no borrowing)</label>
+                <input type="checkbox" id="newPublisherIsJustForSell" name="IsJustForSell"/>
+
+                <label>Minimum Age Required:</label>
+                <input type="number" id="newPublisherAgeLimit" name="AgeLimit" min="0" value="0"/>
+
+                <label>Download URL:</label>
+                <input type="text" id="newPublisherDownloadUrl" name="DownloadUrl" placeholder="https://example.com/book.pdf"/>
+
+                <button type="button" onclick="submitNewPublisherForm()">Create New Book</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Book Modal -->
+<div id="editBookModal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <span class="close" onclick="closeEditBookModal()">&times;</span>
+        <h2>Edit Book</h2>
+        <form id="editBookForm">
+            <input type="hidden" id="editBookId" name="Id"/>
+
+            <label>Cover URL:</label>
+            <input type="text" id="editCover" name="Cover"/>
+
+            <label>Author:</label>
+            <input type="text" id="editAuthor" name="Author"/>
+
+            <label>Title:</label>
+            <input type="text" id="editTitle" name="Title"/>
+
+            <label>Publisher:</label>
+            <input type="text" id="editPublisher" name="Publisher"/>
+
+            <label>Genre:</label>
+            <select id="editGenreSelect">
+                <option value="">Select a type</option>
+                <option value="horror">Horror</option>
+                <option value="comedy">Comedy</option>
+                <option value="drama">Drama</option>
+            </select>
+
+            <label>Sell Quantity:</label>
+            <input type="number" id="editSellQuantity" name="SellQuantity"/>
+
+            <label>Rent Quantity:</label>
+            <input type="number" id="editRentQuantity" name="RentQuantity"/>
+
+            <label>Borrow Price:</label>
+            <input type="number" step="0.01" id="editBorrowPrice" name="Borrowprice"/>
+
+            <label>Buy Price:</label>
+            <input type="number" step="0.01" id="editBuyPrice" name="Buyprice"/>
+
+            <label>Year:</label>
+            <input type="number" id="editYear" name="Year"/>
+
+            <label>Sale %:</label>
+            <input type="number" step="0.01" id="editSalePercentage" name="SalePercentage"/>
+
+            <label>Sale End Date (max 7 days from now):</label>
+            <input type="datetime-local" id="editSaleEndDate" name="SaleEndDate"/>
+
+            <label>Buy-Only</label>
+            <input type="checkbox" id="editIsJustForSell" name="IsJustForSell"/>
+
+            <label>Minimum Age Required:</label>
+            <input type="number" id="editAgeLimit" name="AgeLimit" min="0" value="0"/>
+
+            <label>Download URL:</label>
+            <input type="text" id="editDownloadUrl" name="DownloadUrl"/>
+
+            <button type="button" onclick="submitEditBookForm()">Save Changes</button>
+        </form>
+    </div>
+</div>
+
+<div class="hero">
+    <h1>Welcome to LibraryOfBooks (Admin)</h1>
+    <div class="search-bar">
+        <input type="text" id="search-query" placeholder="Search books..." oninput="searchBooks()"/>
+    </div>
+</div>
+
+<section class="section">
+    <h2>Available Books</h2>
+    <div class="book-grid">
+        <!-- Dynamically inserted -->
+    </div>
+</section>
+
+<div class="mat">
+    <p>&copy; 2024 LibraryOfBooks All rights reserved.</p>
+</div>
+
+<script>
+    // LOGOUT LOGIC
+    function logOut() {
+        document.getElementById("logout-link").addEventListener("click", async (event) => {
+            event.preventDefault();
+            const tokenElement = document.querySelector('input[name="__RequestVerificationToken"]');
+            if (!tokenElement) {
+                console.error("Anti-Forgery Token not found.");
+                return;
+            }
+            try {
+                const antiForgeryToken = tokenElement.value;
+                const response = await fetch("/Users/LogOut", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "RequestVerificationToken": antiForgeryToken
+                    }
+                });
+                if (response.ok) {
+                    localStorage.clear();
+                    window.location.href = "/Users/LogIn";
+                } else {
+                    alert("Logout failed. Try again.");
+                }
+            } catch (error) {
+                console.error("Logout error:", error);
+                alert("Error occurred while logging out.");
+            }
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        // Hide modals initially
+        document.getElementById("addBookModal").style.display = "none";
+        document.getElementById("editBookModal").style.display = "none";
+        document.getElementById("addPublisherModal").style.display = "none";
+
+        loadBooks();
+        logOut();
+    });
+
+    let allBooks = [];
+
+    function loadBooks() {
+        fetch('/Book/GetAllBooksJson')
+            .then(r => r.json())
+            .then(books => {
+                if (Array.isArray(books)) {
+                    allBooks = books;
+                    renderBooks(books);
+                } else {
+                    console.error("Unexpected response format");
+                }
+            })
+            .catch(e => console.error("Error fetching books:", e));
+    }
+
+    function renderBooks(books) {
+        const grid = document.querySelector(".book-grid");
+        grid.innerHTML = "";
+
+        books.forEach(book => {
+            const div = document.createElement("div");
+            div.className = "book-item";
+            div.setAttribute("data-id", book.id);
+
+            // Validate borrow < buy
+            let borrowPrice = book.borrowprice;
+            if (borrowPrice >= book.buyprice) {
+                borrowPrice = `<span style="color:red;font-weight:bold;">Invalid borrow price!</span>`;
+            }
+
+            // Check sale
+            let isOnSale = false;
+            let discountedPrice = 0;
+            if (book.salePercentage > 0 && book.saleEndDate) {
+                const endDate = new Date(book.saleEndDate);
+                if (endDate > new Date()) {
+                    isOnSale = true;
+                    discountedPrice = (book.buyprice * (1 - (book.salePercentage / 100))).toFixed(2);
+                }
+            }
+
+            let priceHTML = `<p>Buy Price: ${book.buyprice}</p>`;
+            if (isOnSale) {
+                priceHTML = `
+                    <p>Buy Price: 
+                        <span style="text-decoration: line-through;">${book.buyprice}</span>
+                        <span style="color:red;margin-left:5px;">${discountedPrice}</span>
+                    </p>
+                `;
+            }
+
+            div.innerHTML = `
+                <button class="delete-book-button" onclick="deleteBook(this)">X</button>
+                <button class="edit-book-button" onclick="openEditBookModal('${book.id}')">Edit</button>
+                <button class="download-button" onclick="chooseDownloadFormat('${book.id}')">Download</button>
+                <img src="${book.cover}" alt="${book.title}" style="max-width:100px;">
+                <h3>${book.title}</h3>
+                <p>Author: ${book.author}</p>
+                <p>Borrow Price: ${borrowPrice}</p>
+                ${priceHTML}
+            `;
+            grid.appendChild(div);
+        });
+    }
+
+    function searchBooks() {
+        const query = document.getElementById("search-query").value.toLowerCase();
+        const filtered = allBooks.filter(b => {
+            const t = (b.title || "").toLowerCase();
+            const a = (b.author || "").toLowerCase();
+            return t.includes(query) || a.includes(query);
+        });
+        renderBooks(filtered);
+    }
+
+    function deleteBook(btn) {
+        const item = btn.parentElement;
+        const bookId = item.getAttribute("data-id");
+        if (!bookId) {
+            alert("No Book ID found.");
+            return;
+        }
+        fetch('/Book/DeleteBookJson', {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({id: bookId})
+        })
+            .then(r => r.json())
+            .then(res => {
+                if (res.success) {
+                    allBooks = allBooks.filter(b => b.id !== bookId);
+                    item.remove();
+                    alert("Book deleted.");
+                } else {
+                    alert("Error deleting book.");
+                }
+            })
+            .catch(e => console.error("Delete error:", e));
+    }
+
+    // DOWNLOAD
+    function chooseDownloadFormat(bookId) {
+        const fmt = prompt("Enter format (pdf, epub, mobi, f2b)", "pdf");
+        if (!fmt) return;
+        downloadBook(bookId, fmt);
+    }
+
+    function downloadBook(bookId, format) {
+        const url = `/Book/Download/${bookId}?format=${format}`;
+        window.open(url, "_blank");
+    }
+
+    // ADD BOOK
+    function openAddBookModal() {
+        document.getElementById("addBookModal").style.display = "flex";
+        const cbox = document.getElementById("isJustForSell");
+        cbox.addEventListener("change", function (e) {
+            const dis = e.target.checked;
+            document.getElementById("rentQuantity").disabled = dis;
+            document.getElementById("bookBorrowprice").disabled = dis;
+        });
+
+        // limit saleEndDate to 7 days
+        const saleEnd = document.getElementById("saleEndDate");
+        const now = new Date();
+        const maxDate = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
+        saleEnd.setAttribute("max", maxDate.toISOString().slice(0, 16));
+    }
+
+    function closeAddBookModal() {
+        document.getElementById("addBookModal").style.display = "none";
+    }
+
+    function submitBookForm() {
+        const form = document.getElementById("addBookForm");
+        const formData = new FormData(form);
+
+        const borrow = parseFloat(formData.get("Borrowprice")) || 0;
+        const buy = parseFloat(formData.get("Buyprice")) || 0;
+        if (borrow >= buy) {
+            alert("Borrow price must be lower than buy price!");
+            return;
+        }
+
+        const saleEnd = formData.get("SaleEndDate");
+        if (saleEnd) {
+            const chosen = new Date(saleEnd);
+            const now = new Date();
+            if ((chosen - now) / (24 * 60 * 60 * 1000) > 7) {
+                alert("Sale end date can't exceed 7 days from now.");
+                return;
+            }
+        }
+        const isJustForSell = document.getElementById("isJustForSell").checked;
+        formData.set("IsJustForSell", isJustForSell);
+
+        const genre = document.getElementById("addGenreSelect").value;
+        formData.set("Genre", genre);
+
+        fetch('/Book/AddBookJson', {
+            method: "POST",
+            body: formData
+        })
+            .then(r => r.json())
+            .then(book => {
+                if (book && book.id) {
+                    allBooks.push(book);
+                    renderBooks(allBooks);
+                    closeAddBookModal();
+                } else {
+                    alert("Failed to add book. Check input.");
+                }
+            })
+            .catch(e => console.error("Add error:", e));
+    }
+
+    // ADD NEW PUBLISHER
+    function openAddPublisherModal() {
+        document.getElementById("addPublisherModal").style.display = "flex";
+        // Clear any old data
+        document.getElementById("existingBookSearch").value = "";
+        document.getElementById("publisherFormSection").style.display = "none";
+    }
+
+    function closeAddPublisherModal() {
+        document.getElementById("addPublisherModal").style.display = "none";
+    }
+
+    async function fetchExistingBook() {
+        const searchInput = document.getElementById("existingBookSearch").value.trim();
+        if (!searchInput) {
+            alert("Please enter an existing Book ID.");
+            return;
+        }
+
+        try {
+            // Attempt to fetch the book details
+            const response = await fetch(`/Book/Details/${searchInput}`);
+            const jsonData = await response.json();
+
+            if (!jsonData.success) {
+                alert(jsonData.message || "Book not found.");
+                return;
+            }
+
+            // Book data
+            const b = jsonData.data;
+
+            // Show the form
+            document.getElementById("publisherFormSection").style.display = "block";
+
+            // Populate the form with existing data
+            // But require a new Book ID so you don't clash with the existing record
+            document.getElementById("newPublisherBookId").value = "";
+            document.getElementById("newPublisherCover").value = b.cover || "";
+            document.getElementById("newPublisherAuthor").value = b.author || "";
+            document.getElementById("newPublisherTitle").value = b.title || "";
+            document.getElementById("newPublisherPublisher").value = b.publisher || "";
+            document.getElementById("newPublisherGenreSelect").value = b.genre || "";
+            document.getElementById("newPublisherSellQuantity").value = b.sellQuantity || 0;
+            document.getElementById("newPublisherRentQuantity").value = b.rentQuantity || 0;
+            document.getElementById("newPublisherBorrowPrice").value = b.borrowprice || 0;
+            document.getElementById("newPublisherBuyPrice").value = b.buyprice || 0;
+            document.getElementById("newPublisherYear").value = b.year || 2024;
+            document.getElementById("newPublisherSalePercentage").value = b.salePercentage || 0;
+
+            if (b.saleEndDate) {
+                const dt = new Date(b.saleEndDate);
+                document.getElementById("newPublisherSaleEndDate").value = dt.toISOString().slice(0,16);
+            } else {
+                document.getElementById("newPublisherSaleEndDate").value = "";
+            }
+
+            document.getElementById("newPublisherIsJustForSell").checked = !!b.isJustForSell;
+            document.getElementById("newPublisherAgeLimit").value = b.ageLimit || 0;
+            document.getElementById("newPublisherDownloadUrl").value = b.downloadUrl || "";
+
+            // Toggle rent fields if IsJustForSell is checked
+            const cbox = document.getElementById("newPublisherIsJustForSell");
+            cbox.addEventListener("change", function (e) {
+                const dis = e.target.checked;
+                document.getElementById("newPublisherRentQuantity").disabled = dis;
+                document.getElementById("newPublisherBorrowPrice").disabled = dis;
+            });
+
+            // limit saleEndDate to 7 days
+            const saleEnd = document.getElementById("newPublisherSaleEndDate");
+            const now = new Date();
+            const maxDate = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
+            saleEnd.setAttribute("max", maxDate.toISOString().slice(0, 16));
+
+        } catch (error) {
+            console.error("Error fetching book data:", error);
+            alert("Error fetching book data.");
+        }
+    }
+
+    async function submitNewPublisherForm() {
+        const form = document.getElementById("addPublisherForm");
+        const formData = new FormData(form);
+
+        // Validate borrow vs buy
+        const borrow = parseFloat(formData.get("Borrowprice")) || 0;
+        const buy = parseFloat(formData.get("Buyprice")) || 0;
+        if (borrow >= buy) {
+            alert("Borrow price must be lower than buy price!");
+            return;
+        }
+
+        // Validate sale date
+        const saleEnd = formData.get("SaleEndDate");
+        if (saleEnd) {
+            const chosen = new Date(saleEnd);
+            const now = new Date();
+            if ((chosen - now) / (24 * 60 * 60 * 1000) > 7) {
+                alert("Sale end date can't exceed 7 days from now.");
+                return;
+            }
+        }
+
+        // IsJustForSell
+        const isJustForSellChecked = document.getElementById("newPublisherIsJustForSell").checked;
+        formData.set("IsJustForSell", isJustForSellChecked);
+
+        // Genre
+        const genreVal = document.getElementById("newPublisherGenreSelect").value;
+        formData.set("Genre", genreVal);
+
+        // POST to add a new book
+        try {
+            const response = await fetch('/Book/AddBookJson', {
+                method: "POST",
+                body: formData
+            });
+            const newBook = await response.json();
+            if (newBook && newBook.id) {
+                // Add the new Book to our local list and re-render
+                allBooks.push(newBook);
+                renderBooks(allBooks);
+                closeAddPublisherModal();
+                alert("New book with new publisher added successfully!");
+            } else {
+                alert("Failed to add book. Check input or ensure new Book ID is unique.");
+            }
+        } catch (e) {
+            console.error("Add new publisher error:", e);
+            alert("Error creating new book with new publisher.");
+        }
+    }
+
+    // EDIT
+    function openEditBookModal(bookId) {
+        document.getElementById("editBookModal").style.display = "flex";
+        fetch(`/Book/Details/${bookId}`)
+            .then(r => r.json())
+            .then(res => {
+                if (res.success) {
+                    const b = res.data;
+                    document.getElementById("editBookId").value = b.id;
+                    document.getElementById("editCover").value = b.cover;
+                    document.getElementById("editAuthor").value = b.author;
+                    document.getElementById("editTitle").value = b.title;
+                    document.getElementById("editPublisher").value = b.publisher;
+                    document.getElementById("editGenreSelect").value = b.genre || "";
+                    document.getElementById("editSellQuantity").value = b.sellQuantity;
+                    document.getElementById("editRentQuantity").value = b.rentQuantity;
+                    document.getElementById("editBorrowPrice").value = b.borrowprice;
+                    document.getElementById("editBuyPrice").value = b.buyprice;
+                    document.getElementById("editYear").value = b.year;
+                    document.getElementById("editSalePercentage").value = b.salePercentage || 0;
+
+                    if (b.saleEndDate) {
+                        const dt = new Date(b.saleEndDate);
+                        document.getElementById("editSaleEndDate").value = dt.toISOString().slice(0, 16);
+                    } else {
+                        document.getElementById("editSaleEndDate").value = "";
+                    }
+
+                    document.getElementById("editDownloadUrl").value = b.downloadUrl || "";
+                    document.getElementById("editIsJustForSell").checked = !!b.isJustForSell;
+                    document.getElementById("editAgeLimit").value = b.ageLimit || 0;
+
+                    document.getElementById("editIsJustForSell").addEventListener("change", function (e) {
+                        const dis = e.target.checked;
+                        document.getElementById("editRentQuantity").disabled = dis;
+                        document.getElementById("editBorrowPrice").disabled = dis;
+                    });
+
+                    // limit saleEndDate to 7 days
+                    const saleEnd = document.getElementById("editSaleEndDate");
+                    const now = new Date();
+                    const maxDate = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
+                    saleEnd.setAttribute("max", maxDate.toISOString().slice(0, 16));
+                } else {
+                    alert(res.message || "Failed to load book details");
+                }
+            })
+            .catch(e => {
+                console.error("Edit fetch error:", e);
+                alert("Error loading book data.");
+                closeEditBookModal();
+            });
+    }
+
+    function closeEditBookModal() {
+        document.getElementById("editBookModal").style.display = "none";
+    }
+
+    function submitEditBookForm() {
+        const form = document.getElementById("editBookForm");
+        const formData = new FormData(form);
+
+        // Borrow < Buy
+        const borrow = parseFloat(formData.get("Borrowprice")) || 0;
+        const buy = parseFloat(formData.get("Buyprice")) || 0;
+        if (borrow >= buy) {
+            alert("Borrow price must be lower than buy price!");
+            return;
+        }
+
+        // Validate Sale End Date
+        const saleEnd = formData.get("SaleEndDate");
+        if (saleEnd) {
+            const chosen = new Date(saleEnd);
+            const now = new Date();
+            if ((chosen - now) / (24 * 60 * 60 * 1000) > 7) {
+                alert("Sale end date can't exceed 7 days from now.");
+                return;
+            }
+        }
+
+        const isJustForSell = document.getElementById("editIsJustForSell").checked;
+        formData.set("IsJustForSell", isJustForSell);
+
+        fetch('/Book/EditBookJson', {
+            method: "POST",
+            body: formData
+        })
+            .then(r => r.json())
+            .then(updated => {
+                if (updated && updated.id) {
+                    const idx = allBooks.findIndex(x => x.id === updated.id);
+                    if (idx !== -1) {
+                        allBooks[idx] = updated;
+                    }
+                    renderBooks(allBooks);
+                    closeEditBookModal();
+                } else {
+                    alert("Failed to update book. Check input.");
+                }
+            })
+            .catch(e => {
+                console.error("Edit error:", e);
+                alert("Error updating book.");
+            });
+    }
+</script>
+</body>
+</html>

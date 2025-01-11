@@ -1,0 +1,83 @@
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrary.Data.csproj.AssemblyReference.cache
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrary.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrary.Data.AssemblyInfoInputs.cache
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrary.Data.AssemblyInfo.cs
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrary.Data.csproj.CoreCompileInputs.cache
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary.Data\bin\Debug\net8.0\MyLibrary.Data.deps.json
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary.Data\bin\Debug\net8.0\MyLibrary.Data.dll
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary.Data\bin\Debug\net8.0\MyLibrary.Data.pdb
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary.Data\bin\Debug\net8.0\MyLibrary.Core.dll
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary.Data\bin\Debug\net8.0\MyLibrary.Core.pdb
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrar.6F1DDDCA.Up2Date
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrary.Data.dll
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\refint\MyLibrary.Data.dll
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrary.Data.pdb
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\ref\MyLibrary.Data.dll
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary.Data\bin\Debug\net8.0\MyLibrary.Data.deps.json
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary.Data\bin\Debug\net8.0\MyLibrary.Data.runtimeconfig.json
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary.Data\bin\Debug\net8.0\MyLibrary.Data.dll
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary.Data\bin\Debug\net8.0\MyLibrary.Data.pdb
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary.Data\bin\Debug\net8.0\MyLibrary.Core.dll
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary.Data\bin\Debug\net8.0\MyLibrary.Core.pdb
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrary.Data.csproj.AssemblyReference.cache
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrary.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrary.Data.AssemblyInfoInputs.cache
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrary.Data.AssemblyInfo.cs
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrary.Data.csproj.CoreCompileInputs.cache
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrar.6F1DDDCA.Up2Date
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrary.Data.dll
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\refint\MyLibrary.Data.dll
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrary.Data.pdb
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrary.Data.genruntimeconfig.cache
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\ref\MyLibrary.Data.dll
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary\MyLibrary.Data\bin\Debug\net8.0\MyLibrary.Data.deps.json
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary\MyLibrary.Data\bin\Debug\net8.0\MyLibrary.Data.runtimeconfig.json
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary\MyLibrary.Data\bin\Debug\net8.0\MyLibrary.Data.dll
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary\MyLibrary.Data\bin\Debug\net8.0\MyLibrary.Data.pdb
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary\MyLibrary.Data\bin\Debug\net8.0\MyLibrary.Core.dll
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary\MyLibrary.Data\bin\Debug\net8.0\MyLibrary.Core.pdb
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrary.Data.csproj.AssemblyReference.cache
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrary.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrary.Data.AssemblyInfoInputs.cache
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrary.Data.AssemblyInfo.cs
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrary.Data.csproj.CoreCompileInputs.cache
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrar.6F1DDDCA.Up2Date
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrary.Data.dll
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\refint\MyLibrary.Data.dll
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrary.Data.pdb
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrary.Data.genruntimeconfig.cache
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\ref\MyLibrary.Data.dll
+C:\Users\fadi\Desktop\Projects\MyLibrary\MyLibrary.Data\bin\Debug\net8.0\MyLibrary.Data.deps.json
+C:\Users\fadi\Desktop\Projects\MyLibrary\MyLibrary.Data\bin\Debug\net8.0\MyLibrary.Data.runtimeconfig.json
+C:\Users\fadi\Desktop\Projects\MyLibrary\MyLibrary.Data\bin\Debug\net8.0\MyLibrary.Data.dll
+C:\Users\fadi\Desktop\Projects\MyLibrary\MyLibrary.Data\bin\Debug\net8.0\MyLibrary.Data.pdb
+C:\Users\fadi\Desktop\Projects\MyLibrary\MyLibrary.Data\bin\Debug\net8.0\MyLibrary.Core.dll
+C:\Users\fadi\Desktop\Projects\MyLibrary\MyLibrary.Data\bin\Debug\net8.0\MyLibrary.Core.pdb
+C:\Users\fadi\Desktop\Projects\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrary.Data.csproj.AssemblyReference.cache
+C:\Users\fadi\Desktop\Projects\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrary.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\fadi\Desktop\Projects\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrary.Data.AssemblyInfoInputs.cache
+C:\Users\fadi\Desktop\Projects\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrary.Data.AssemblyInfo.cs
+C:\Users\fadi\Desktop\Projects\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrary.Data.csproj.CoreCompileInputs.cache
+C:\Users\fadi\Desktop\Projects\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrar.6F1DDDCA.Up2Date
+C:\Users\fadi\Desktop\Projects\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrary.Data.dll
+C:\Users\fadi\Desktop\Projects\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\refint\MyLibrary.Data.dll
+C:\Users\fadi\Desktop\Projects\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrary.Data.pdb
+C:\Users\fadi\Desktop\Projects\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrary.Data.genruntimeconfig.cache
+C:\Users\fadi\Desktop\Projects\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\ref\MyLibrary.Data.dll
+C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Data\bin\Debug\net8.0\MyLibrary.Data.deps.json
+C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Data\bin\Debug\net8.0\MyLibrary.Data.runtimeconfig.json
+C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Data\bin\Debug\net8.0\MyLibrary.Data.dll
+C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Data\bin\Debug\net8.0\MyLibrary.Data.pdb
+C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Data\bin\Debug\net8.0\MyLibrary.Core.dll
+C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Data\bin\Debug\net8.0\MyLibrary.Core.pdb
+C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrary.Data.csproj.AssemblyReference.cache
+C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrary.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrary.Data.AssemblyInfoInputs.cache
+C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrary.Data.AssemblyInfo.cs
+C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrary.Data.csproj.CoreCompileInputs.cache
+C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrar.6F1DDDCA.Up2Date
+C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrary.Data.dll
+C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\refint\MyLibrary.Data.dll
+C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrary.Data.pdb
+C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrary.Data.genruntimeconfig.cache
+C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\ref\MyLibrary.Data.dll

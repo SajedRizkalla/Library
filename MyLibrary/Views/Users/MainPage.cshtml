@@ -1,0 +1,51 @@
+﻿@model MyLibrary.Data.User
+
+@{
+    ViewData["Title"] = "MainPage";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Homepage</title>
+    <link rel="stylesheet" href="~/css/Main.css">
+</head>
+<body>
+    <header>
+        <div class="logo">LibraryOfBooks</div>
+        <nav>
+            <a href="/Users/MainPage">Home</a>
+            <a href="/Users/LogIn">LogIn</a>
+            <a href="/Users/SignUp">SignUp</a>
+
+        </nav>
+    </header>
+
+    <div class="hero">
+        <h1>Welcome to LibraryOfBooks</h1>
+        <div class="search-bar">
+            <input type="text" placeholder="Search books...">
+            <button class="search-button">Search</button>
+        </div>
+        <a asp-action="LogIn" asp-controller="Users" class="shop-now-button">Shop Now</a>
+        </div>
+        <p></p>
+    </div>
+
+    <section class="section">
+        <h2>Popular Books</h2>
+        <div class="book-grid">
+        </div>
+    </section>
+
+    <div class="mat">
+        <p>&copy; 2024 LibraryOfBooks All rights reserved.</p>
+    </div>
+
+    @section Scripts {
+        @await Html.PartialAsync("_ValidationScriptsPartial")
+    }
+</body>
+</html>

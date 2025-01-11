@@ -1,0 +1,101 @@
+﻿@model MyLibrary.Data.User
+
+@{
+    ViewData["Title"] = "Login Page";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="~/css/LogIn.css">
+</head>
+<body>
+<header>
+    <div class="logo">LibraryOfBooks</div>
+    <nav>
+        <a asp-action="Index" asp-controller="Users">Home</a>
+        <a asp-action="Signup" asp-controller="Users">SignUp</a>
+    </nav>
+</header>
+
+<div class="login-container">
+    <h1>Login</h1>
+    <form id="loginForm" method="post">
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            <label asp-for="Username">Username</label>
+            <input asp-for="Username" id="username" class="form-control" placeholder="Enter your username" required/>
+        </div>
+        <div class="form-group">
+            <label asp-for="Password">Password</label>
+            <input asp-for="Password" id="password" type="password" class="form-control"
+                   placeholder="Enter your password" required/>
+        </div>
+        <div class="form-group">
+            <button type="button" id="loginButton" class="login-button">Login</button>
+        </div>
+    </form>
+
+
+    <div class="additional-links">
+        <a asp-action="ForgotPassword" asp-controller="Users">Forgot your password?</a>
+        <br>
+        <a href="/Users/signup">Create a new account</a>
+    </div>
+</div>
+
+<div class="mat">
+    <p>&copy; 2024 LibraryOfBooks All rights reserved.</p>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("loginButton").addEventListener("click", async function () {
+            const tokenElement = document.querySelector('input[name="__RequestVerificationToken"]');
+            if (!tokenElement) {
+                console.error("Anti-Forgery Token not found.");
+                return;
+            }
+
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            const antiForgeryToken = tokenElement.value;
+
+            try {
+                const response = await fetch("/Users/LogIn", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "RequestVerificationToken": antiForgeryToken
+                    },
+                    body: JSON.stringify({Username: username, Password: password})
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    localStorage.setItem("username", result.username);
+                    localStorage.setItem("email", result.email);
+                    localStorage.setItem("token", result.token);
+                    localStorage.setItem("isAdmin", result.isAdmin);
+
+                    if (result.isAdmin) {
+                        window.location.href = "/Users/AdminMain";
+                    } else {
+                        window.location.href = "/Users/Index";
+                    }
+                } else {
+                    alert(result.message || "Login failed.");
+                }
+            } catch (error) {
+                console.error("Error during login:", error);
+            }
+        });
+    });
+</script>
+
+
+</body>
+</html>

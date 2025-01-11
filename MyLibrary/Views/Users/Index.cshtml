@@ -1,0 +1,1023 @@
+﻿@model IEnumerable<MyLibrary.Data.Book>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Homepage</title>
+    <link rel="stylesheet" href="~/css/mainPage2.css">
+</head>
+<body>
+<header>
+    <div class="logo">LibraryOfBooks</div>
+    <nav id="navigation-links">
+        <!-- Links will be populated dynamically -->
+    </nav>
+    <form id="antiForgeryForm" method="post" style="display: none;">
+        @Html.AntiForgeryToken()
+    </form>
+</header>
+
+<div class="hero">
+    <h1>Welcome to LibraryOfBooks</h1>
+    <div class="search-bar">
+        <input type="text" id="search-query" placeholder="Search books..." oninput="filterBooks()"/>
+    </div>
+    <button class="shop-now-button" onclick="window.location.href='/Cart';">Shop Now!</button>
+    <button class="manage-list-button" onclick="toggleFilter()">Manage List</button>
+</div>
+
+<section class="section">
+    <h2>Available Books</h2>
+    <div class="book-grid" id="book-grid">
+        @* Loop over the Model (IEnumerable<Book>) and render each item *@
+        @foreach (var book in Model)
+        {
+            <div class="book-item"
+                 data-id="@book.Id"
+                 data-title="@book.Title"
+                 data-author="@book.Author"
+                 data-price="@book.Buyprice"
+                 data-genre="@book.Genre"
+                 data-issale="@book.IsOnSale.ToString().ToLower()"
+                 data-isjustforsell="@book.IsJustForSell.ToString().ToLower()"
+                 data-salepercentage="@book.SalePercentage"
+                 data-borrowprice="@book.Borrowprice"
+                 data-saleenddate="@(book.SaleEndDate.HasValue ? book.SaleEndDate.Value.ToString("o") : "")">
+
+                <img src="@book.Cover" alt="@book.Title"/>
+                <h3>@book.Title</h3>
+                <p>Author: @book.Author</p>
+                <p class="publisher-year">
+                    Publisher: @book.Publisher, Year: @book.Year
+                </p>
+                <p>Minimum Age Required:+@book.AgeLimit</p>
+                <p>Genre: @book.Genre</p>
+                @* Add Average Rating *@
+                @if (book.RatingList != null && book.RatingList.Any())
+                {
+                    var averageRating = book.RatingList.Average(r => r.RatingValue);
+                    <p><strong>Overall Rating:</strong> @averageRating ★</p>
+                }
+                else
+                {
+                    <p><strong>Overall Rating:</strong> N/A</p>
+                }
+
+                <!-- We'll do the actual buy/borrow price formatting in JS later. 
+                     The main purpose is to have the data- attributes above. 
+                -->
+                <div class="popup-buttons" id="popup-buttons">
+                    <button class="buy-now-button"
+                            onclick="showPopup(
+                                '@book.Title',
+                            '@book.Author',
+                            @book.Buyprice,
+                            '@book.Genre',
+                            '@book.IsJustForSell.ToString().ToLower()',
+                            @book.Borrowprice,
+                            '@book.Id',
+                            '@book.IsOnSale.ToString().ToLower()',
+                            @book.SalePercentage,
+                            'buyNow'
+                            )">
+                        Buy Now
+                    </button>
+                    @if (!book.IsJustForSell)
+                    {
+                        <button class="borrow-now-button"
+                                onclick="showPopup(
+                                    '@book.Title',
+                                '@book.Author',
+                                @book.Buyprice,
+                                '@book.Genre',
+                                '@book.IsJustForSell.ToString().ToLower()',
+                                @book.Borrowprice,
+                                '@book.Id',
+                                @book.IsOnSale.ToString().ToLower(),
+                                @book.SalePercentage,
+                                'borrowNow'
+                                )">
+                            Borrow Now
+                        </button>
+                    }
+
+                </div>
+                <div class="button-container">
+                    <button class="add-to-cart"
+                            onclick="showPopup(
+                                '@book.Title',
+                            '@book.Author',
+                            @book.Buyprice,
+                            '@book.Genre',
+                            '@book.IsJustForSell.ToString().ToLower()',
+                            @book.Borrowprice,
+                            '@book.Id',
+                            '@book.IsOnSale.ToString().ToLower()',
+                            @book.SalePercentage
+                            )">
+                        Add to Cart
+                    </button>
+
+
+                    <button class="toggle-comments-btn" onclick="toggleComments('@book.Id')">
+                        View Comments
+                    </button>
+                </div>
+                <div class="comments-section" id="comments-@book.Id" style="display: none;">
+                    <h4>Comments and Ratings</h4>
+                    @if (book.RatingList != null && book.RatingList.Any())
+                    {
+                        var averageRating = book.RatingList.Average(r => r.RatingValue);
+                        <p><strong>Average Rating:</strong> @averageRating ★</p>
+                        <ul>
+                            @foreach (var rating in book.RatingList)
+                            {
+                                <li>
+                                    <div
+                                        class="rating">@string.Concat(Enumerable.Repeat('★', rating.RatingValue ?? 0))</div>
+                                    <p>@rating.Feedback</p>
+                                    <em>@rating.Timestamp.ToShortDateString()</em>
+                                </li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <p>No feedback available for this book.</p>
+                    }
+
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+<!-- Popup for demonstration of "Shop/Borrow" -->
+<div id="popup" class="popup" style="display: none;">
+    <div class="popup-content">
+        <span class="close" onclick="closePopup()">&times;</span>
+        <h2 id="popup-title"></h2>
+        <p><strong>Author:</strong> <span id="popup-author"></span></p>
+        <p><strong>Buy Price:</strong> $<span id="popup-price"></span></p>
+        <p><strong>Borrow Price:</strong> $<span id="popup-borrowprice"></span></p>
+        <p><strong>Genre:</strong> <span id="popup-genre"></span></p>
+
+        <div class="popup-buttons" id="popup-buttons">
+            <button class="shop-button" style="margin-right: 10px;" onclick="shop()">Shop</button>
+            <button class="borrow-button" onclick="borrow()">Borrow</button>
+        </div>
+    </div>
+</div>
+
+<!-- Filter Container -->
+<div class="filter-container" id="filter-container" style="display: none;">
+    <label for="salary-range">Price Range:</label>
+    <input type="number" id="min-price" placeholder="Min Price" min="0" disabled/>
+    <input type="number" id="max-price" placeholder="Max Price" min="0" disabled/>
+
+    <label for="book-type">Book Type:</label>
+    <select id="book-type" class="genreType" disabled>
+        <option value="">All Genres</option>
+        <option value="horror">Horror</option>
+        <option value="comedy">Comedy</option>
+        <option value="drama">Drama</option>
+    </select>
+
+    <!-- Show Discounted Only checkbox -->
+    <label>
+        <input type="checkbox" id="sale-only" disabled/>
+        Discounted Only
+    </label>
+
+    <label for="sort-order">Sort By:</label>
+    <select id="sort-order" disabled>
+        <option value="">Default</option>
+        <option value="asc">Price: Low to High</option>
+        <option value="desc">Price: High to Low</option>
+    </select>
+
+    <button onclick="filterBooks()" disabled>Apply Filters</button>
+</div>
+
+
+<section id="rating-feedback">
+    <h2>Rate Our Website</h2>
+    <div class="rating-overview">
+        <p>
+        <h3>Overall Website Rating: <span class="rating-score">@ViewBag.OverallRating</span> out of 5</h3></p>
+    </div>
+
+    <div class="feedback-form">
+        <h3>Leave Your Feedback</h3>
+        <form method="POST" asp-controller="Feedback" asp-action="WebSubmitFeedback">
+            <textarea name="feedback" rows="4" placeholder="Write your feedback here..."></textarea>
+            <div class="card">
+                <h1>Add Your Rating</h1>
+                <span onclick="setRating(1)"
+                      class="star" name="RatingValue" value="1">
+                    ★
+                </span>
+                <span onclick="setRating(2)"
+                      class="star" name="RatingValue" value="2">
+                    ★
+                </span>
+                <span onclick="setRating(3)"
+                      class="star" name="RatingValue" value="3">
+                    ★
+                </span>
+                <span onclick="setRating(4)"
+                      class="star" name="RatingValue" value="4">
+                    ★
+                </span>
+                <span onclick="setRating(5)"
+                      class="star" name="RatingValue" value="5">
+                    ★
+                </span>
+                <h3 id="output">
+                    Rating is: 0/5
+                </h3>
+                <input type="hidden" id="RatingValue" name="RatingValue" value="0"/>
+
+            </div>
+
+            <button type="submit">Submit Feedback</button>
+
+        </form>
+        <h3>Users Ratings/Feedbacks</h3>
+        <div class="Webcomments-section"
+             style="margin-top: 1rem; padding: 1rem; background: #2c2c2c; border-radius: 0.5rem; max-height: 300px; overflow-y: scroll;">
+            @if (ViewBag.WebsiteRatings != null && ((List<MyLibrary.Data.Rating>)ViewBag.WebsiteRatings).Any())
+            {
+                foreach (var rating in (List<MyLibrary.Data.Rating>)ViewBag.WebsiteRatings)
+                {
+                    <div style="margin-bottom: 1rem; padding: 0.5rem; background: #202020; border-radius: 0.5rem;">
+                        <div style="color: gold;">@string.Concat(Enumerable.Repeat("★", rating.RatingValue ?? 0))</div>
+                        <p style="color: #e0e0e0;">@rating.Feedback</p>
+                        <small style="color: #888;">@rating.Timestamp.ToShortDateString()</small>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>No feedback available.</p>
+            }
+        </div>
+
+    </div>
+</section>
+
+<div class="mat">
+    <p>&copy; 2025 LibraryOfBooks All rights reserved.</p>
+</div>
+
+
+<div class="popup" id="paymentModal">
+    <div class="popup-content">
+        <button class="close-btn" onclick="closePaymentModal()">✕</button>
+
+        <h2 style="margin-bottom:0.5rem;">Secure Payment (Stripe Test)</h2>
+
+        <!-- Payment Summary -->
+        <div class="pay-summary">
+            <!-- Show the total from the server (ViewBag.TotalPrice) -->
+            Your total payment:
+            <strong>$<span id="total-amount">@ViewBag.TotalPrice</span></strong>
+        </div>
+
+        <!-- Stripe Card Element -->
+        <div class="form-row">
+            <label for="card-element">
+                Credit or debit card:
+            </label>
+            <div id="card-element"></div>
+            <div id="card-errors" role="alert" style="color:red;"></div>
+        </div>
+
+        <!-- Pay button -->
+        <button id="pay-button" onclick="handleStripePayment()">Pay Now</button>
+    </div>
+</div>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+
+    const originalBookItems = @Html.Raw(Json.Serialize(Model));
+
+    let directOperation = null;   // "buy" or "rent"
+    let directBookId = null;
+    let directQtyOrDays = 0;
+    let directTotalCost = 0; // We'll show this in the Stripe modal
+
+
+    let currentBookId = null;
+
+
+    const stripe = Stripe("pk_test_51QeNRWKCjW1mTVvyV3ljAYDgTvocWzUBTvnUSzRRqUQrN1bTZnTnnqn5cNjANS2DOzNx5Y79YGePaPGGw9JbSU6o00A83jlkjV");
+    const elements = stripe.elements();
+    const cardElement = elements.create('card', {
+        style: {
+            base: {fontSize: '16px', color: '#32325d'}
+        }
+    });
+    cardElement.mount('#card-element');
+
+    function setRating(value) {
+        // Update the hidden input with the selected rating
+        document.getElementById('RatingValue').value = value;
+
+        // Update the display text
+        document.getElementById('output').innerText = `Rating is: ${value}/5`;
+
+        // Update star styling
+        const stars = document.querySelectorAll('.star');
+        stars.forEach((star, index) => {
+            if (index < value) {
+                star.style.color = 'gold';
+            } else {
+                star.style.color = 'gray';
+            }
+        });
+        gfg(value);
+    }
+
+
+    // 1) Dynamically update header based on localStorage (user presence)
+    function updateHeader() {
+        const isAdmin = localStorage.getItem("isAdmin") === "true"; // Check if the user is an admin
+        const user = localStorage.getItem("username");
+        const navLinks = document.getElementById("navigation-links");
+
+        if (user) {
+            if (isAdmin) {
+                navLinks.innerHTML = `
+            <a href="/Users/ProfilePage">Profile Page</a>
+            <a href="/Cart">Cart</a>
+            <a href="/Users/MyBooks">MyBooks</a>
+            <a class="admin" href="/Users/AdminMain">Admin Home</a>
+            <a href="#" id="logout-link">Logout</a>
+            `;
+            } else {
+
+                navLinks.innerHTML = `
+            <a href="/Users/ProfilePage">Profile Page</a>
+            <a href="/Cart">Cart</a>
+            <a href="/Users/MyBooks">MyBooks</a>
+            <a href="#" id="logout-link">Logout</a>
+            `;
+            }
+
+            document.getElementById("logout-link").addEventListener("click", async function (event) {
+                event.preventDefault();
+                const tokenElement = document.querySelector('input[name="__RequestVerificationToken"]');
+                if (!tokenElement) {
+                    console.error("Anti-Forgery Token not found.");
+                    return;
+                }
+                try {
+                    const antiForgeryToken = tokenElement.value;
+                    const response = await fetch("/Users/LogOut", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "RequestVerificationToken": antiForgeryToken
+                        }
+                    });
+                    if (response.ok) {
+                        localStorage.clear();
+                        window.location.href = "/Users/LogIn";
+                    } else {
+                        alert("Logout failed. Please try again.");
+                    }
+                } catch (error) {
+                    console.error("Error during logout:", error);
+                    alert("An error occurred while logging out.");
+                }
+            });
+        } else {
+            navLinks.innerHTML = `
+                <a href="/Users/">Home</a>
+                <a href="/Users/LogIn">LogIn</a>
+                <a id="signup-link" href="/Users/SignUp">SignUp</a>
+            `;
+            document.getElementById("signup-link").addEventListener("click", function (event) {
+                event.preventDefault();
+                localStorage.clear();
+                window.location.href = "/Users/SignUp";
+            });
+        }
+    }
+
+    // 2) Update "Add to Cart" (or Borrow) buttons based on user presence
+    function updateCartButtons() {
+        const user = localStorage.getItem("username");
+        const cartButtons = document.querySelectorAll(".add-to-cart");
+
+
+        cartButtons.forEach(button => {
+            if (user) {
+                button.style.display = "block";
+            } else {
+                button.style.display = "none";
+            }
+        });
+
+    }
+
+    // 3) Post-process items to show sale logic, etc.
+    function enhanceBookItems() {
+        const bookItems = document.querySelectorAll(".book-item");
+        bookItems.forEach(item => {
+            const price = parseFloat(item.getAttribute("data-price")) || 0;
+            const borrowPrice = parseFloat(item.getAttribute("data-borrowprice")) || 0;
+            const isOnSale = (item.getAttribute("data-issale") === "true");
+            const salePercent = parseFloat(item.getAttribute("data-salepercentage")) || 0;
+            const isJustForSell = (item.getAttribute("data-isjustforsell") === "true");
+
+            // We'll create price display
+            let priceContainer = document.createElement("p");
+            if (isOnSale) {
+                let discounted = (price * (1 - salePercent / 100)).toFixed(2);
+                priceContainer.innerHTML = `
+                    Buy Price:
+                    <span style="text-decoration: line-through;">${price}</span>
+                    <span style="color:red; margin-left:5px;">${discounted}</span>
+                `;
+            } else {
+                priceContainer.textContent = `Buy Price: ${price}`;
+            }
+            item.appendChild(priceContainer);
+
+            // If not just for sell, show Borrow Price
+            if (!isJustForSell) {
+                let p = document.createElement("p");
+                p.textContent = `Borrow Price: ${borrowPrice}`;
+                item.appendChild(p);
+            }
+        });
+    }
+
+    // 4) Main filter logic
+    function filterBooks() {
+        const query = document.getElementById("search-query").value.toLowerCase();
+        const minPrice = parseFloat(document.getElementById("min-price").value) || 0;
+        const maxPrice = parseFloat(document.getElementById("max-price").value) || Infinity;
+        const genre = document.getElementById("book-type").value.toLowerCase();
+        const sortOrder = document.getElementById("sort-order").value;
+        const saleOnly = document.getElementById("sale-only").checked;
+
+        const user = localStorage.getItem("username");
+
+        // Use the original data (passed from the Razor model)
+        const filteredBooks = originalBookItems.filter(book => {
+            const title = book.title.toLowerCase();
+            const author = book.author.toLowerCase();
+            const price = book.buyprice || 0;
+            const bookGenre = book.genre.toLowerCase();
+            const isSale = book.isOnSale;
+
+            const matchTitleAuthor = title.includes(query) || author.includes(query);
+            const matchPrice = price >= minPrice && price <= maxPrice;
+            const matchGenre = genre === "" || bookGenre === genre;
+            const matchSale = saleOnly ? isSale : true;
+
+            return matchTitleAuthor && matchPrice && matchGenre && matchSale;
+        });
+
+        // Sort books
+        if (sortOrder === "asc") {
+            filteredBooks.sort((a, b) => a.buyprice - b.buyprice);
+        } else if (sortOrder === "desc") {
+            filteredBooks.sort((a, b) => b.buyprice - a.buyprice);
+        }
+
+        // Re-render books
+        const grid = document.getElementById("book-grid");
+        grid.innerHTML = "";
+
+        filteredBooks.forEach(book => {
+            const div = document.createElement("div");
+            div.className = "book-item";
+            div.setAttribute("data-id", book.id);
+            div.setAttribute("data-title", book.title);
+            div.setAttribute("data-author", book.author);
+            div.setAttribute("data-price", book.buyprice);
+            div.setAttribute("data-genre", book.genre);
+            div.setAttribute("data-issale", book.isOnSale.toString().toLowerCase());
+            div.setAttribute("data-isjustforsell", book.isJustForSell.toString().toLowerCase());
+            div.setAttribute("data-salepercentage", book.salePercentage);
+            div.setAttribute("data-borrowprice", book.borrowprice);
+            div.setAttribute("data-saleenddate", book.saleEndDate ? book.saleEndDate : "");
+
+            div.innerHTML = `
+            <img src="${book.cover}" alt="${book.title}" />
+            <h3>${book.title}</h3>
+            <p>Author: ${book.author}</p>
+            <p class="publisher-year">Publisher: ${book.publisher}, Year: ${book.year}</p>
+            <p>Minimum Age Required: +${book.ageLimit}</p>
+            <p>Genre: ${book.genre}</p>
+            ${
+                book.ratingList && book.ratingList.length > 0
+                    ? `<p><strong>Overall Rating:</strong> ${(
+                        book.ratingList.reduce((sum, r) => sum + r.ratingValue, 0) / book.ratingList.length
+                    ).toFixed(1)} ★</p>`
+                    : `<p><strong>Overall Rating:</strong> N/A</p>`
+            }
+            ${
+                user
+                    ? `<div class="popup-buttons">
+                        <button class="buy-now-button" onclick="showPopup(
+                            '${book.title}',
+                            '${book.author}',
+                            ${book.buyprice},
+                            '${book.genre}',
+                            '${book.isJustForSell}',
+                            ${book.borrowprice},
+                            '${book.id}',
+                            '${book.isOnSale}',
+                            ${book.salePercentage},
+                            'buyNow'
+                        )">Buy Now</button>
+                        ${
+                        !book.isJustForSell
+                            ? `<button class="borrow-now-button" onclick="showPopup(
+                                    '${book.title}',
+                                    '${book.author}',
+                                    ${book.buyprice},
+                                    '${book.genre}',
+                                    '${book.isJustForSell}',
+                                    ${book.borrowprice},
+                                    '${book.id}',
+                                    '${book.isOnSale}',
+                                    ${book.salePercentage},
+                                    'borrowNow'
+                                )">Borrow Now</button>`
+                            : ""
+                    }
+                    </div>
+                    <div class="button-container">
+                        <button class="add-to-cart" onclick="showPopup(
+                            '${book.title}',
+                            '${book.author}',
+                            ${book.buyprice},
+                            '${book.genre}',
+                            '${book.isJustForSell}',
+                            ${book.borrowprice},
+                            '${book.id}',
+                            '${book.isOnSale}',
+                            ${book.salePercentage}
+                        )">Add to Cart</button>`
+                    : ""
+            }
+                <button class="toggle-comments-btn" onclick="toggleComments('${book.id}')">View Comments</button>
+            </div>
+            <div class="comments-section" id="comments-${book.id}" style="display: none;">
+                <h4>Comments and Ratings</h4>
+                ${
+                book.ratingList && book.ratingList.length > 0
+                    ? `<p><strong>Average Rating:</strong> ${(book.ratingList.reduce((sum, r) => sum + r.ratingValue, 0) / book.ratingList.length).toFixed(1)} ★</p>
+                            <ul>
+                                ${book.ratingList.map(
+                        rating => `<li>
+                                        <div class="rating">${"★".repeat(rating.ratingValue || 0)}</div>
+                                        <p>${rating.feedback}</p>
+                                        <em>${new Date(rating.timestamp).toLocaleDateString()}</em>
+                                    </li>`
+                    ).join("")}
+                            </ul>`
+                    : `<p>No feedback available for this book.</p>`
+            }
+            </div>
+        `;
+            grid.appendChild(div);
+        });
+
+        // Enhance book items (e.g., display sale prices)
+        enhanceBookItems();
+    }
+
+
+
+    //---------------------------------------------------
+    // Payment Modal Functions
+    //---------------------------------------------------
+    function openPaymentModal() {
+        console.log("here")
+        // Show directTotalCost in #total-amount
+        document.getElementById("total-amount").textContent = directTotalCost.toFixed(2);
+        document.getElementById('paymentModal').style.display = 'flex';
+    }
+
+    function closePaymentModal() {
+        document.getElementById('paymentModal').style.display = 'none';
+    }
+
+    //---------------------------------------------------
+    // handleStripePayment => finalizeDirectOperation
+    //---------------------------------------------------
+    async function handleStripePayment() {
+        const payButton = document.getElementById('pay-button');
+        payButton.disabled = true;
+
+        const totalAmount = parseFloat(document.getElementById('total-amount').textContent) || 0;
+
+        let clientSecret = null;
+        try {
+            // Step A: Create PaymentIntent
+            const response = await fetch('/Order/CreatePaymentIntent', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({amount: totalAmount})
+            });
+            const data = await response.json();
+            clientSecret = data.clientSecret;
+        } catch (error) {
+            console.error('Error creating PaymentIntent', error);
+            alert("Could not create payment. Please try again.");
+            payButton.disabled = false;
+            return;
+        }
+
+        // Step B: Confirm Payment
+        const {paymentIntent, error} = await stripe.confirmCardPayment(clientSecret, {
+            payment_method: {card: cardElement}
+        });
+
+        if (error) {
+            console.error('Payment failed:', error.message);
+            document.getElementById('card-errors').textContent = error.message;
+            payButton.disabled = false;
+            return;
+        }
+
+        // Payment success
+        alert("Payment Successful via Stripe!");
+        closePaymentModal();
+
+        // Finalize
+        finalizeDirectOperation();
+    }
+
+    //---------------------------------------------------
+    // finalizeDirectOperation => calls /Order/DirectPurchase or DirectRent
+    //---------------------------------------------------
+    async function finalizeDirectOperation() {
+        if (!directOperation) return; // No direct mode set
+
+        try {
+            if (directOperation === "buy") {
+                // /Order/DirectPurchase
+                const resp = await fetch(`/Order/DirectPurchase?bookId=${directBookId}&quantity=${directQtyOrDays}`, {
+                    method: 'POST'
+                });
+                const data = await resp.json();
+                if (data.success) {
+                    alert("Direct Purchase completed successfully!");
+                } else {
+                    alert("Purchase failed: " + data.message);
+                }
+            } else if (directOperation === "rent") {
+                // /Order/DirectRent
+                const resp = await fetch(`/Order/DirectRent?bookId=${directBookId}&days=${directQtyOrDays}`, {
+                    method: 'POST'
+                });
+                const data = await resp.json();
+                console.log("DirectRent response:", data);
+                const messages = Array.isArray(data.messages) ? data.messages : [data.message];
+
+                for (const message of messages || []) {
+                    if (message.includes("Please confirm if you wish to be added to the waiting list")) {
+                        const bookId = extractBookIdFromMessage(message);
+                        const bookTitle = extractBookTitleFromMessage(message);
+
+                        const userWantsToJoin = confirm(message);
+                        console.log("userWantsToJoin", userWantsToJoin);
+                        console.log('bookId bookTitle', bookId,bookTitle)
+                        if (userWantsToJoin) {
+                            await addToWaitingList(bookId, bookTitle);
+                        }
+                    } else {
+                        alert(message);
+                    }
+                }
+
+                if (data.success) {
+                    alert("Direct Rent completed successfully!");
+                } else if (!messages.some(msg => msg.includes("waiting list"))) {
+                    alert("Rent failed: " + (data.message || "An unknown error occurred."));
+                }
+            }
+        } catch (err) {
+            console.error("Error finalizing direct operation:", err);
+            alert("An error occurred. Check console for details.");
+        } finally {
+            // reset
+            directOperation = null;
+            directBookId = null;
+            directQtyOrDays = 0;
+            directTotalCost = 0;
+        }
+    }
+    async function addToWaitingList(bookId, bookTitle) {
+        if (!bookId || !bookTitle) {
+            alert("Unable to add to the waiting list. Missing book information.");
+            return;
+        }
+        console.log("Adding to waiting list:", { bookId, bookTitle });
+
+        const response = await fetch('/Order/AddToWaitingList', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ bookId, bookTitle, username: '@User.Identity.Name' })
+        });
+
+        const result = await response.json();
+        alert(result.message);
+    }
+
+    function extractBookIdFromMessage(message) {
+        const match = message.match(/Book ID: ([a-f0-9-]{36})/i);
+        return match ? match[1] : null;
+    }
+
+    function extractBookTitleFromMessage(message) {
+        const match = message.match(/"([^"]+)"/);
+        return match ? match[1] : null;
+    }
+    // 5) Show popup for an example “Add to Cart”
+    function showPopup(
+        title,
+        author,
+        price,
+        genre,
+        isJustForSell,
+        borrowPrice,
+        bookId,
+        isOnSale,
+        salePercentage,
+        operation // "buyNow", "borrowNow", or "addToCart"
+    ) {
+        isJustForSell = (isJustForSell === true || isJustForSell === "true");
+        isOnSale = (isOnSale === true || isOnSale === "true");
+        salePercentage = parseFloat(salePercentage) || 0;
+
+        let finalPrice = price;
+        if (isOnSale && salePercentage > 0) {
+            finalPrice = price * (1 - salePercentage / 100);
+        }
+
+        // Update popup fields
+        document.getElementById("popup-title").textContent = title;
+        document.getElementById("popup-author").textContent = author;
+        document.getElementById("popup-price").textContent = finalPrice.toFixed(2);
+        document.getElementById("popup-genre").textContent = genre;
+        document.getElementById("popup-borrowprice").textContent = borrowPrice;
+
+        currentBookId = bookId;
+
+        const borrowPriceElement = document.getElementById("popup-borrowprice").parentElement;
+        const shopBtn = document.querySelector(".shop-button");
+        const borrowBtn = document.querySelector(".borrow-button");
+
+        // Hide borrow if only for sell
+        if (isJustForSell) {
+            borrowBtn.style.display = "none";
+            borrowPriceElement.style.display = "none";
+        } else {
+            borrowBtn.style.display = "inline-block";
+            borrowPriceElement.style.display = "block";
+        }
+
+        // Adjust button logic based on operation
+        console.log("operation",operation)
+        if (operation === "buyNow") {
+            borrowBtn.style.display = "none";
+            shopBtn.innerText = "Buy Now";
+            shopBtn.style.display = "inline-block";
+            shopBtn.onclick = () => handleBuyNow(finalPrice); // pass finalPrice
+        } else if (operation === "borrowNow") {
+            shopBtn.style.display = "none";
+            borrowBtn.style.display = "inline-block";
+            borrowBtn.onclick = () => handleBorrowNow(borrowPrice);
+        } else {
+            // addToCart
+            shopBtn.style.display = "inline-block";
+            shopBtn.innerText = "Shop (Cart)";
+            shopBtn.onclick = shop;
+
+            borrowBtn.style.display = isJustForSell ? "none" : "inline-block";
+            borrowBtn.onclick = borrow;
+        }
+
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function updateBuyBorrowButtons() {
+        const user = localStorage.getItem("username"); // Check for user in localStorage
+        const buyButtons = document.querySelectorAll(".buy-now-button");
+        const borrowButtons = document.querySelectorAll(".borrow-now-button");
+        const addToCartButtons = document.querySelectorAll(".add-to-cart");
+        const filterContainer = document.getElementById("filter-container"); // Manage List container
+
+        const isManageListActive = filterContainer.classList.contains("active"); // Check if Manage List is active
+
+        if (!user || isManageListActive) {
+            // Hide Buy Now, Borrow Now, and Add to Cart buttons
+            buyButtons.forEach(button => button.style.display = "none");
+            borrowButtons.forEach(button => button.style.display = "none");
+            addToCartButtons.forEach(button => button.style.display = "none");
+        } else {
+            // Show Buy Now, Borrow Now, and Add to Cart buttons if user exists and Manage List is not active
+            buyButtons.forEach(button => button.style.display = "inline-block");
+            borrowButtons.forEach(button => button.style.display = "inline-block");
+            addToCartButtons.forEach(button => button.style.display = "inline-block");
+        }
+    }
+
+    // Attach to Manage List button toggle
+    document.querySelector('.manage-list-button').addEventListener('click', updateBuyBorrowButtons);
+
+    // Ensure the function is called on page load to update button visibility
+    document.addEventListener("DOMContentLoaded", updateBuyBorrowButtons);
+
+
+    document.addEventListener("DOMContentLoaded", () => {
+        updateBuyBorrowButtons();
+    });
+
+
+    //---------------------------------------------------
+    // handleBuyNow => open payment modal, store direct info
+    //---------------------------------------------------
+    function handleBuyNow(finalPrice) {
+        if (!currentBookId) {
+            alert("No book selected for direct purchase.");
+            return;
+        }
+        const qty = prompt("How many copies to buy NOW?", "1");
+        if (!qty) return;
+
+        // Store direct details
+        directOperation = "buy";
+        directBookId = currentBookId;
+        directQtyOrDays = parseInt(qty, 10);
+        directTotalCost = finalPrice * directQtyOrDays;
+
+        closePopup();
+        openPaymentModal();
+    }
+
+    //---------------------------------------------------
+    // handleBorrowNow => open payment modal, store direct info
+    //---------------------------------------------------
+    function handleBorrowNow(dailyRent) {
+        if (!currentBookId) {
+            alert("No book selected for direct rent.");
+            return;
+        }
+        const days = prompt("How many days to rent NOW?", "30");
+        if (!days) return;
+
+        directOperation = "rent";
+        directBookId = currentBookId;
+        directTotalCost = dailyRent;
+        directQtyOrDays = parseInt(days, 10);
+        closePopup();
+        openPaymentModal();
+    }
+
+    function shop() {
+        if (!currentBookId) {
+            alert("No book selected for purchase.");
+            return;
+        }
+
+        const qty = prompt("How many copies to buy?", "1");
+        if (!qty) return;
+
+        fetch(`/Cart/AddToCart?bookId=${currentBookId}&isForRent=false&quantityOrDays=${qty}`, {
+            method: 'POST'
+        })
+            .then(r => r.json())
+            .then(res => {
+                if (res.success) {
+                    alert("Added to cart for purchase!");
+                } else {
+                    alert("Failed to add to cart: " + res.message);
+                }
+                closePopup();
+            });
+    }
+
+    function borrow() {
+        if (!currentBookId) {
+            alert("No book selected for renting.");
+            return;
+        }
+
+        const days = prompt("How many days to rent?", "30");
+        if (!days) return;
+
+        fetch(`/Cart/AddToCart?bookId=${currentBookId}&isForRent=true&quantityOrDays=${days}`, {
+            method: 'POST'
+        })
+            .then(r => r.json())
+            .then(res => {
+                if (res.success) {
+                    alert("Added to cart for renting!");
+                } else {
+                    alert("Failed to add to cart: " + res.message);
+                }
+                closePopup();
+            });
+    }
+
+    function closePopup() {
+        const popup = document.getElementById("popup");
+        popup.style.display = "none";
+        currentBookId = null; // Clear the current book ID
+    }
+
+    function toggleFilter() {
+        const filterContainer = document.getElementById("filter-container");
+        const inputs = filterContainer.querySelectorAll("input, select, button");
+
+        if (filterContainer.classList.contains("active")) {
+            // Deactivate the filter
+            filterContainer.classList.remove("active");
+            filterContainer.style.display = "none";
+
+            // Disable inputs to prevent interaction
+            inputs.forEach(input => {
+                input.disabled = true;
+            });
+        } else {
+            // Activate the filter
+            filterContainer.classList.add("active");
+            filterContainer.style.display = "block";
+
+            // Enable inputs for interaction
+            inputs.forEach(input => {
+                input.disabled = false;
+            });
+        }
+    }
+
+
+    // 6) On DOMContentLoaded, run everything
+
+
+    function toggleComments(bookId) {
+        const section = document.getElementById(`comments-${bookId}`);
+        section.style.display = section.style.display === 'none' ? 'block' : 'none';
+    }
+
+    // To access the stars
+    let stars =
+        document.getElementsByClassName("star");
+    let output =
+        document.getElementById("output");
+
+    // Funtion to update rating
+    function gfg(n) {
+        remove();
+        for (let i = 0; i < n; i++) {
+            if (n == 1) cls = "one";
+            else if (n == 2) cls = "two";
+            else if (n == 3) cls = "three";
+            else if (n == 4) cls = "four";
+            else if (n == 5) cls = "five";
+            stars[i].className = "star " + cls;
+        }
+        output.innerText = "Rating is: " + n + "/5";
+    }
+
+    // To remove the pre-applied styling
+    function remove() {
+        let i = 0;
+        while (i < 5) {
+            stars[i].className = "star";
+            i++;
+        }
+    }
+
+
+    document.addEventListener("DOMContentLoaded", () => {
+        console.log("dom load")
+        const filterContainer = document.getElementById("filter-container");
+        const inputs = filterContainer.querySelectorAll("input, select, button");
+
+        // Hide filter container and disable inputs
+        filterContainer.style.display = "none";
+        inputs.forEach(input => {
+            input.disabled = true;
+        });
+        updateHeader();
+        updateCartButtons();
+        enhanceBookItems();
+    });
+
+</script>
+</body>
+</html>

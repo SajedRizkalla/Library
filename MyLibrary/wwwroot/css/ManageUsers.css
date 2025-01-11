@@ -1,0 +1,249 @@
+﻿/* General Styles for Manage Users Page */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #2c2c2c;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 0;
+}
+
+.page-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin: 2rem 0;
+    text-shadow: 0 0 10px #ff6600;
+    color: #ff6600;
+}
+
+.search-container {
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.search-bar {
+    padding: 0.8rem;
+    font-size: 1rem;
+    width: 50%;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background: #333;
+    color: #fff;
+    box-shadow: 0 0 8px #000;
+}
+
+/* Table Styling */
+.styled-table {
+    width: 90%;
+    margin: 2rem auto;
+    border-collapse: collapse;
+    border: 1px solid #444;
+    background: #1f1f1f;
+    color: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.styled-table thead {
+    background: #202020;
+    text-align: left;
+}
+
+.styled-table th, .styled-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #444;
+}
+
+.styled-table tr:hover {
+    background: #333;
+    transition: background 0.3s ease;
+}
+
+.styled-table .status.active {
+    color: #2ecc71;
+    font-weight: bold;
+}
+
+.styled-table .status.inactive {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+/* Buttons */
+.button {
+    padding: 0.8rem 1.2rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s, box-shadow 0.3s;
+    display: inline-block;
+}
+
+.button:hover {
+    opacity: 0.9;
+}
+
+.toggle-button {
+    background-color: #ff6600;
+    color: #000;
+}
+
+.toggle-button:hover {
+    background-color: #cc5200;
+}
+
+.edit-button {
+    background-color: #3498db;
+    color: #fff;
+}
+
+.edit-button:hover {
+    background-color: #2980b9;
+}
+
+.add-user-container {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.add-user-button {
+    background: #ff6600;
+    color: #000;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    box-shadow: 0 0 12px #ff6600;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+/* Modal Styling */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: #1f1f1f;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 0 12px #000;
+    color: #e0e0e0;
+    position: relative;
+}
+
+.modal-content h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #ff6600;
+    text-shadow: 0 0 5px #ff6600;
+}
+
+.modal-content label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #e0e0e0;
+    font-weight: bold;
+}
+
+.modal-content input,
+.modal-content select {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border: none;
+    border-radius: 5px;
+    background: #333;
+    color: #fff;
+    box-shadow: 0 0 8px #000;
+}
+
+.modal-content button {
+    display: block;
+    width: 100%;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 5px;
+    background: #ff6600;
+    color: #000;
+    font-weight: bold;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 0 12px #ff6600;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+.modal-content button:hover {
+    background: #cc5200;
+    box-shadow: 0 0 15px #cc5200;
+}
+
+.close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #ff6600;
+    transition: color 0.3s ease;
+}
+
+.close:hover {
+    color: #cc5200;
+}
+
+/* Header and Navigation */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: #202020;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+header .logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #ff6600;
+    text-shadow: 0 0 8px #ff6600;
+}
+nav {
+    display: flex;
+    gap: 20px; /* Adds spacing between navigation links */
+    justify-content: flex-end; /* Align links to the right */
+    align-items: center; /* Vertically center the links */
+}
+nav a {
+    text-decoration: none;
+    color: #e0e0e0;
+    font-size: 1rem;
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+nav a:hover {
+    color: #ff6600;
+    text-shadow: 0 0 5px #ff6600;
+}
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    background: #202020;
+    border-top: 2px solid #333;
+    color: #e0e0e0;
+    font-size: 1rem;
+}

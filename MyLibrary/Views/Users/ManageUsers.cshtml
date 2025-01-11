@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Users</title>
+    <link rel="stylesheet" href="~/css/ManageUsers.css">
+</head>
+<body>
+<header>
+    <div class="logo">LibraryOfBooks</div>
+    <nav>
+        <a asp-action="ProfilePage" asp-controller="Users">Profile Page</a>
+        <a asp-action="Index" asp-controller="Users">General Home</a>
+        <a asp-action="AdminMain" asp-controller="Users">Admin Home</a>
+        <a asp-action="ManageRentedBooks" asp-controller="Book">Manage Rented Books</a>
+        <a asp-action="LogIn" asp-controller="Users">Logout</a>
+
+    </nav>
+</header>
+
+<main>
+    <h1 class="page-title">Manage Users</h1>
+
+    <div class="search-container">
+        <input type="text" id="searchQuery" class="search-bar" placeholder="Search users..."/>
+    </div>
+
+    <table class="styled-table" id="usersTable">
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th>Is Admin</th>
+            <th>Is Active</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var u in Model)
+        {
+            <tr data-username="@u.Username" data-email="@u.Email" data-gender="@u.Gender" data-isadmin="@u.IsAdmin"
+                data-isactive="@u.IsActive">
+                <td>@u.Username</td>
+                <td>@u.Email</td>
+                <td>@u.Gender</td>
+                <td>@(u.IsAdmin ? "Yes" : "No")</td>
+                <td>
+                    <span class="status @(u.IsActive ? "active" : "inactive")">
+                        @(u.IsActive ? "Active" : "Inactive")
+                    </span>
+                </td>
+                <td>
+                    <button
+                        class="button edit-button"
+                        onclick="openUserModal('@u.Username', '@u.Email', '@u.Gender', @u.IsAdmin.ToString().ToLower(), @u.IsActive.ToString().ToLower())">
+                        Edit
+                    </button>
+                    <a asp-action="ToggleActive" asp-route-username="@u.Username" class="button toggle-button">
+                        @(u.IsActive ? "Deactivate" : "Activate")
+                    </a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+    <div class="add-user-container">
+        <button class="button add-user-button" onclick="openUserModal()">Add New User</button>
+    </div>
+
+    <!-- User Modal -->
+    <div id="userModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeUserModal()">&times;</span>
+            <h2 id="modalTitle">Add/Edit User</h2>
+            <form id="userForm">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="Username" required/>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="Email" required/>
+
+                <label for="gender" id="gender1">Gender:</label>
+                <select id="gender" name="Gender" >
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+
+                <label for="isAdmin">Is Admin:</label>
+                <input type="checkbox" id="isAdmin" name="IsAdmin"/>
+
+                <label for="isActive">Is Active:</label>
+                <input type="checkbox" id="isActive" name="IsActive"/>
+
+                <!-- Password field (only for Add New User) -->
+                <div id="passwordContainer">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="Password" />
+                </div>
+
+                <button type="submit" class="button save-button">Save</button>
+            </form>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2024 LibraryOfBooks. All rights reserved.</p>
+</footer>
+
+<script>
+    function openUserModal(username = '', email = '', gender = 'Male', isAdmin = false, isActive = true) {
+        const modal = document.getElementById("userModal");
+        modal.style.display = "flex";
+
+        document.getElementById("modalTitle").textContent = username ? "Edit User" : "Add New User";
+
+        document.getElementById("username").value = username;
+        document.getElementById("email").value = email;
+        document.getElementById("gender").value = gender;
+        document.getElementById("isAdmin").checked = isAdmin;
+        document.getElementById("isActive").checked = isActive;
+
+        const usernameInput = document.getElementById("username");
+        const passwordInput = document.getElementById("password");
+        const passwordContainer = document.getElementById("passwordContainer");
+        const genderSelect = document.getElementById("gender");
+        const genderLabel = document.getElementById("gender1");
+
+        if (username) {
+            // Edit User mode
+            usernameInput.readOnly = true;
+            passwordContainer.style.display = "none"; // Hide password field
+            passwordInput.required = false; // Remove required attribute
+            genderSelect.style.display = "none"; // Hide gender field
+            genderLabel.style.display = "none"; // Hide gender label
+            genderSelect.required = false; // Remove required attribute
+        } else {
+            // Add User mode
+            usernameInput.readOnly = false;
+            passwordContainer.style.display = "block"; // Show password field
+            passwordInput.required = true; // Add required attribute
+            genderSelect.style.display = "block"; // Show gender field
+            genderLabel.style.display = "block"; // Show gender label
+            genderSelect.required = true; // Add required attribute
+        }
+    }
+
+    function closeUserModal() {
+        const modal = document.getElementById("userModal");
+        modal.style.display = "none";
+    }
+
+    document.getElementById("userForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const formData = new FormData(this);
+        const isEdit = !!document.getElementById("username").readOnly;
+
+        // Add IsAdmin manually if it's unchecked
+        const isAdminCheckbox = document.getElementById("isAdmin");
+        formData.set("IsAdmin", isAdminCheckbox.checked ? "true" : "false");
+
+        const url = isEdit ? '/Users/EditUser' : '/Users/CreateUser';
+
+        fetch(url, {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert("User saved successfully.");
+                    location.reload();
+                } else {
+                    alert(`Failed to save user: ${data.message}`);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    });
+
+
+    window.onclick = function (event) {
+        const modal = document.getElementById("userModal");
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    };
+</script>
+
+</body>
+</html>

@@ -1,0 +1,105 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\fadi\\Desktop\\Projects\\MyLibrary\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{9BC1019D-CDE4-4B1B-A0A7-3E8814727433}|MyLibrary\\MyLibrary.csproj|c:\\users\\fadi\\desktop\\projects\\mylibrary\\mylibrary\\wwwroot\\css\\mainpage2.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{9BC1019D-CDE4-4B1B-A0A7-3E8814727433}|MyLibrary\\MyLibrary.csproj|solutionrelative:mylibrary\\wwwroot\\css\\mainpage2.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9BC1019D-CDE4-4B1B-A0A7-3E8814727433}|MyLibrary\\MyLibrary.csproj|c:\\users\\fadi\\desktop\\projects\\mylibrary\\mylibrary\\views\\users\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9BC1019D-CDE4-4B1B-A0A7-3E8814727433}|MyLibrary\\MyLibrary.csproj|solutionrelative:mylibrary\\views\\users\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9BC1019D-CDE4-4B1B-A0A7-3E8814727433}|MyLibrary\\MyLibrary.csproj|c:\\users\\fadi\\desktop\\projects\\mylibrary\\mylibrary\\controllers\\feedbackcontroller .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9BC1019D-CDE4-4B1B-A0A7-3E8814727433}|MyLibrary\\MyLibrary.csproj|solutionrelative:mylibrary\\controllers\\feedbackcontroller .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9BC1019D-CDE4-4B1B-A0A7-3E8814727433}|MyLibrary\\MyLibrary.csproj|c:\\users\\fadi\\desktop\\projects\\mylibrary\\mylibrary\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9BC1019D-CDE4-4B1B-A0A7-3E8814727433}|MyLibrary\\MyLibrary.csproj|solutionrelative:mylibrary\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{71CB67F1-71DB-480A-B6FA-F60E1F344671}|MyLibrary.Data\\MyLibrary.Data.csproj|c:\\users\\fadi\\desktop\\projects\\mylibrary\\mylibrary.data\\mybooksviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{71CB67F1-71DB-480A-B6FA-F60E1F344671}|MyLibrary.Data\\MyLibrary.Data.csproj|solutionrelative:mylibrary.data\\mybooksviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MyBooksViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\fadi\\Desktop\\Projects\\MyLibrary\\MyLibrary.Data\\MyBooksViewModel.cs",
+              "RelativeDocumentMoniker": "MyLibrary.Data\\MyBooksViewModel.cs",
+              "ToolTip": "C:\\Users\\fadi\\Desktop\\Projects\\MyLibrary\\MyLibrary.Data\\MyBooksViewModel.cs",
+              "RelativeToolTip": "MyLibrary.Data\\MyBooksViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-08T21:06:30.827Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "C:\\Users\\fadi\\Desktop\\Projects\\MyLibrary\\MyLibrary\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "MyLibrary\\Controllers\\UsersController.cs",
+              "ToolTip": "C:\\Users\\fadi\\Desktop\\Projects\\MyLibrary\\MyLibrary\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "MyLibrary\\Controllers\\UsersController.cs",
+              "ViewState": "AgIAACIAAAAAAAAAAAAIwEMAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-08T20:45:13.538Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FeedbackController .cs",
+              "DocumentMoniker": "C:\\Users\\fadi\\Desktop\\Projects\\MyLibrary\\MyLibrary\\Controllers\\FeedbackController .cs",
+              "RelativeDocumentMoniker": "MyLibrary\\Controllers\\FeedbackController .cs",
+              "ToolTip": "C:\\Users\\fadi\\Desktop\\Projects\\MyLibrary\\MyLibrary\\Controllers\\FeedbackController .cs",
+              "RelativeToolTip": "MyLibrary\\Controllers\\FeedbackController .cs",
+              "ViewState": "AgIAADMAAAAAAAAAAAAIwEsAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-08T15:45:52.784Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\fadi\\Desktop\\Projects\\MyLibrary\\MyLibrary\\Views\\Users\\Index.cshtml",
+              "RelativeDocumentMoniker": "MyLibrary\\Views\\Users\\Index.cshtml",
+              "ToolTip": "C:\\Users\\fadi\\Desktop\\Projects\\MyLibrary\\MyLibrary\\Views\\Users\\Index.cshtml",
+              "RelativeToolTip": "MyLibrary\\Views\\Users\\Index.cshtml",
+              "ViewState": "AgIAAMEAAAAAAAAAAAAswOQAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-07T21:31:49.517Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "mainPage2.css",
+              "DocumentMoniker": "C:\\Users\\fadi\\Desktop\\Projects\\MyLibrary\\MyLibrary\\wwwroot\\css\\mainPage2.css",
+              "RelativeDocumentMoniker": "MyLibrary\\wwwroot\\css\\mainPage2.css",
+              "ToolTip": "C:\\Users\\fadi\\Desktop\\Projects\\MyLibrary\\MyLibrary\\wwwroot\\css\\mainPage2.css",
+              "RelativeToolTip": "MyLibrary\\wwwroot\\css\\mainPage2.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-01-08T20:16:59.363Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

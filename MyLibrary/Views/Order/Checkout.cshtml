@@ -1,0 +1,326 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model IEnumerable<MyLibrary.Data.DTOS.OrderDTOs.CheckoutCartItemDto>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkout</title>
+    <link rel="stylesheet" href="~/css/CartPage.css" />
+    <style>
+        /* Example styling for a modern modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+        .modal-content {
+            background-color: #070403;
+            border-radius: 8px;
+            padding: 2rem;
+            min-width: 320px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        .close-btn {
+            color: white;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            position: absolute;
+            top: 1rem; right: 1rem;
+            cursor: pointer;
+        }
+
+        #card-element {
+            border: 1px solid #130b0b;
+            border-radius: 4px;
+            padding: 10px;
+            margin-top: 8px;
+        }
+
+        .form-row {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 1rem;
+        }
+
+        .pay-summary {
+            background-color: #130a0a;
+            padding: 0.8rem 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        #pay-button {
+            background-color: #bd461d;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            padding: 0.8rem 1.2rem;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        #pay-button:hover {
+            background-color: #bd461d;
+        }
+
+        /* Simple responsive adjustment */
+       
+    </style>
+</head>
+<body>
+<header>
+    <div class="logo">LibraryOfBooks</div>
+    <nav>
+        <a asp-action="ProfilePage" asp-controller="Users">Profile Page</a>
+        <a asp-action="Index" asp-controller="Users">Home</a>
+        <a href="#" id="logout-link">Logout</a>
+    </nav>
+</header>
+
+<main>
+    <h1>Checkout</h1>
+
+    <div>
+        @* Display each item *@
+        @foreach (var item in Model)
+        {
+            <p>
+                <strong>Title:</strong> @item.Title <br />
+                <strong>BookID:</strong> @item.BookId <br />
+
+                @if (item.IsForRent)
+                {
+                    <span>Rent Price (per day): @item.PricePerUnit</span><br />
+                    <span>Days: @item.RentDays</span><br />
+                }
+                else
+                {
+                    <span>Buy Price (per copy): @item.PricePerUnit</span><br />
+                    <span>Quantity: @item.BuyQuantity</span><br />
+                }
+
+                <strong>Final Price:</strong> <span class="finalPriceSpan">@item.FinalPrice</span>
+            </p>
+        }
+    </div>
+
+    <hr />
+
+    <!-- Show a summary total for the entire order -->
+    @{
+        // This total is computed server-side
+        var total = ViewBag.TotalPrice ?? 0.0f;
+    }
+    <h3>Your total is: $@total</h3>
+
+    <button onclick="openPaymentModal()" style="padding: 10px 20px;color: chocolate">Confirm &amp; Pay</button>
+</main>
+
+<!-- Payment Modal (initially hidden) -->
+<div class="modal-overlay" id="paymentModal">
+    <div class="modal-content">
+        <button class="close-btn" onclick="closePaymentModal()">✕</button>
+
+        <h2 style="margin-bottom:0.5rem;">Secure Payment (Stripe Test)</h2>
+
+        <!-- Payment Summary -->
+        <div class="pay-summary">
+            <!-- Show the total from the server (ViewBag.TotalPrice) -->
+            Your total payment:
+            <strong>$<span id="total-amount">@ViewBag.TotalPrice</span></strong>
+        </div>
+
+        <!-- Stripe Card Element -->
+        <div class="form-row">
+            <label for="card-element">
+                Credit or debit card:
+            </label>
+            <div id="card-element"></div>
+            <div id="card-errors" role="alert" style="color:red;"></div>
+        </div>
+
+        <!-- Pay button -->
+        <button id="pay-button" onclick="handleStripePayment()">Pay Now</button>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2025 LibraryOfBooks. All rights reserved.</p>
+</footer>
+
+<!-- 1. Stripe.js library -->
+<script src="https://js.stripe.com/v3/"></script>
+
+<script>
+    // Your test publishable key from Stripe
+    const stripe = Stripe("pk_test_51QeNRWKCjW1mTVvyV3ljAYDgTvocWzUBTvnUSzRRqUQrN1bTZnTnnqn5cNjANS2DOzNx5Y79YGePaPGGw9JbSU6o00A83jlkjV");
+    const elements = stripe.elements();
+    const cardElement = elements.create('card', {
+        style: {
+            base: {
+                fontSize: '16px',
+                color: '#32325d'
+            }
+        }
+    });
+    cardElement.mount('#card-element');
+
+    // Show the Payment Modal
+    function openPaymentModal() {
+        document.getElementById('paymentModal').style.display = 'flex';
+    }
+
+    // Hide the Payment Modal
+    function closePaymentModal() {
+        document.getElementById('paymentModal').style.display = 'none';
+    }
+
+    // 1) Ask server to create a PaymentIntent for the final total
+    // 2) Confirm the card payment with that clientSecret
+    async function handleStripePayment() {
+        const payButton = document.getElementById('pay-button');
+        payButton.disabled = true;
+
+        // Grab the total from the page (ViewBag.TotalPrice) 
+        // This is in dollars, so we need to pass it to the server as-is 
+        // (the server will convert to cents).
+        const totalAmount = parseFloat(document.getElementById('total-amount').textContent) || 0;
+
+        let clientSecret = null;
+
+        try {
+            // Step A: Create PaymentIntent on server, passing the total
+            const response = await fetch('/Order/CreatePaymentIntent', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ amount: totalAmount })
+            });
+            const data = await response.json();
+            clientSecret = data.clientSecret;
+        } catch (error) {
+            console.error('Error creating PaymentIntent', error);
+            alert("Could not create payment. Please try again.");
+            payButton.disabled = false;
+            return;
+        }
+
+        // Step B: Confirm the Card Payment client-side
+        const { paymentIntent, error } = await stripe.confirmCardPayment(
+            clientSecret, {
+                payment_method: {
+                    card: cardElement
+                }
+            }
+        );
+
+        if (error) {
+            // Display error to user
+            console.error('Payment failed:', error.message);
+            document.getElementById('card-errors').textContent = error.message;
+            payButton.disabled = false;
+            return;
+        }
+
+        // Payment successful
+        alert("Test Payment Successful via Stripe! We will now finalize your order.");
+        closePaymentModal();
+        confirmCheckout();
+    }
+
+    // Final Step: call your existing confirmCheckout code
+    async function confirmCheckout() {
+        const res = await fetch('/Order/ConfirmCheckout', { method: 'POST' });
+        const data = await res.json();
+        console.log('data', data);
+
+        for (const message of data.messages) {
+            if (message.includes("Please confirm if you wish to be added to the waiting list")) {
+                const bookId    = extractBookIdFromMessage(message);
+                const bookTitle = extractBookTitleFromMessage(message);
+
+                const userWantsToJoin = confirm(message);
+                console.log('userWantsToJoin',userWantsToJoin)
+                if (userWantsToJoin) {
+                    await addToWaitingList(bookId, bookTitle);
+                }
+            } else {
+                alert(message);
+            }
+        }
+
+        if (res.ok) {
+            alert("Checkout completed successfully!");
+            window.location.href = '/Users/MyBooks';
+        } else {
+            alert("Checkout encountered issues. Please try again.");
+        }
+    }
+
+    async function addToWaitingList(bookId, bookTitle) {
+        if (!bookId || !bookTitle) {
+            alert("Unable to add to the waiting list. Missing book information.");
+            return;
+        }
+        console.log('bookId',bookId)
+        console.log('bookTitle',bookTitle)
+        const response = await fetch('/Order/AddToWaitingList', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ bookId, bookTitle, username: '@User.Identity.Name' })
+        });
+
+        const result = await response.json();
+        alert(result.message);
+    }
+
+    function extractBookIdFromMessage(message) {
+        const match = message.match(/Book ID: ([a-f0-9-]{36})/i);
+        return match ? match[1] : null;
+    }
+
+    function extractBookTitleFromMessage(message) {
+        const match = message.match(/"([^"]+)"/);
+        return match ? match[1] : null;
+    }
+
+    function logOut() {
+        document.getElementById("logout-link").addEventListener("click", async (event) => {
+            event.preventDefault();
+            const tokenElement = document.querySelector('input[name="__RequestVerificationToken"]');
+            if (!tokenElement) {
+                console.error("Anti-Forgery Token not found.");
+                return;
+            }
+            try {
+                const antiForgeryToken = tokenElement.value;
+                const response = await fetch("/Users/LogOut", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "RequestVerificationToken": antiForgeryToken
+                    }
+                });
+                if (response.ok) {
+                    localStorage.clear();
+                    window.location.href = "/Users/LogIn";
+                } else {
+                    alert("Logout failed. Try again.");
+                }
+            } catch (error) {
+                console.error("Logout error:", error);
+                alert("Error occurred while logging out.");
+            }
+        });
+    }
+    document.addEventListener("DOMContentLoaded", () => {
+        logOut();
+    });
+</script>
+</body>
+</html>

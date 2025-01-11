@@ -1,0 +1,184 @@
+﻿/* General Page Styling */
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #2c2c2c;
+    color: #e0e0e0;
+}
+
+header {
+    position: sticky; /* Or 'fixed' depending on your choice */
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: #202020;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #ff6600;
+    text-shadow: 0 0 8px #ff6600;
+}
+
+nav a {
+    text-decoration: none;
+    color: #e0e0e0;
+    font-size: 1rem;
+    transition: color 0.3s, text-shadow 0.3s;
+    margin-left: 1rem;
+}
+
+nav a:hover {
+    color: #ff6600;
+    text-shadow: 0 0 5px #ff6600;
+}
+
+.page-title {
+    text-align: center;
+    font-size: 2rem;
+    margin: 2rem 0;
+    text-shadow: 0 0 8px #ff6600;
+    color: #ff6600;
+}
+
+.search-container {
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.search-bar {
+    padding: 0.8rem;
+    font-size: 1rem;
+    width: 50%;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background: #333;
+    color: #fff;
+    box-shadow: 0 0 8px #000;
+}
+
+/* Table Styling */
+.styled-table {
+    width: 90%;
+    margin: 2rem auto;
+    border-collapse: collapse;
+    border: 1px solid #444;
+    background: #1f1f1f;
+    color: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.styled-table thead {
+    background: #202020;
+    text-align: left;
+}
+
+.styled-table th, .styled-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #444;
+}
+
+.styled-table tr:hover {
+    background: #333;
+    transition: background 0.3s ease;
+}
+
+/* Days Left Highlight */
+.warning {
+    color: #ff6600;
+    font-weight: bold;
+}
+.normal {
+    color: #fff;
+}
+
+/* Return Button */
+.return-button {
+    background-color: #e74c3c;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    padding: 0.6rem 1rem;
+    cursor: pointer;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+.return-button:hover {
+    background-color: #c0392b;
+    box-shadow: 0 0 8px #c0392b;
+}
+
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    background: #202020;
+    border-top: 2px solid #333;
+    color: #e0e0e0;
+    font-size: 1rem;
+}
+
+.view-waiting-button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    margin-left: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.notify-button {
+    background-color: #f39c12;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    margin-left: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Modal for waiting list */
+.modal {
+    display: none; /* hidden by default */
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: #1f1f1f;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 70%;
+    max-width: 800px;
+    box-shadow: 0 0 15px #000;
+    color: #fff;
+}
+
+.close {
+    float: right;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.waiting-user {
+    margin-bottom: 1rem;
+    background: #2c2c2c;
+    border-radius: 6px;
+    padding: 0.8rem;
+}
+

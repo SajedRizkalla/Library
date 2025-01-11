@@ -1,0 +1,33 @@
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary\MyLibrary.Service\bin\Debug\net8.0\MyLibrary.Service.deps.json
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary\MyLibrary.Service\bin\Debug\net8.0\MyLibrary.Service.dll
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary\MyLibrary.Service\bin\Debug\net8.0\MyLibrary.Service.pdb
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary\MyLibrary.Service\obj\Debug\net8.0\MyLibrary.Service.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary\MyLibrary.Service\obj\Debug\net8.0\MyLibrary.Service.AssemblyInfoInputs.cache
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary\MyLibrary.Service\obj\Debug\net8.0\MyLibrary.Service.AssemblyInfo.cs
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary\MyLibrary.Service\obj\Debug\net8.0\MyLibrary.Service.csproj.CoreCompileInputs.cache
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary\MyLibrary.Service\obj\Debug\net8.0\MyLibrary.Service.dll
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary\MyLibrary.Service\obj\Debug\net8.0\refint\MyLibrary.Service.dll
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary\MyLibrary.Service\obj\Debug\net8.0\MyLibrary.Service.pdb
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary\MyLibrary.Service\obj\Debug\net8.0\ref\MyLibrary.Service.dll
+C:\Users\fadi\Desktop\Projects\MyLibrary\MyLibrary.Service\bin\Debug\net8.0\MyLibrary.Service.deps.json
+C:\Users\fadi\Desktop\Projects\MyLibrary\MyLibrary.Service\bin\Debug\net8.0\MyLibrary.Service.dll
+C:\Users\fadi\Desktop\Projects\MyLibrary\MyLibrary.Service\bin\Debug\net8.0\MyLibrary.Service.pdb
+C:\Users\fadi\Desktop\Projects\MyLibrary\MyLibrary.Service\obj\Debug\net8.0\MyLibrary.Service.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\fadi\Desktop\Projects\MyLibrary\MyLibrary.Service\obj\Debug\net8.0\MyLibrary.Service.AssemblyInfoInputs.cache
+C:\Users\fadi\Desktop\Projects\MyLibrary\MyLibrary.Service\obj\Debug\net8.0\MyLibrary.Service.AssemblyInfo.cs
+C:\Users\fadi\Desktop\Projects\MyLibrary\MyLibrary.Service\obj\Debug\net8.0\MyLibrary.Service.csproj.CoreCompileInputs.cache
+C:\Users\fadi\Desktop\Projects\MyLibrary\MyLibrary.Service\obj\Debug\net8.0\MyLibrary.Service.dll
+C:\Users\fadi\Desktop\Projects\MyLibrary\MyLibrary.Service\obj\Debug\net8.0\refint\MyLibrary.Service.dll
+C:\Users\fadi\Desktop\Projects\MyLibrary\MyLibrary.Service\obj\Debug\net8.0\MyLibrary.Service.pdb
+C:\Users\fadi\Desktop\Projects\MyLibrary\MyLibrary.Service\obj\Debug\net8.0\ref\MyLibrary.Service.dll
+C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Service\bin\Debug\net8.0\MyLibrary.Service.deps.json
+C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Service\bin\Debug\net8.0\MyLibrary.Service.dll
+C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Service\bin\Debug\net8.0\MyLibrary.Service.pdb
+C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Service\obj\Debug\net8.0\MyLibrary.Service.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Service\obj\Debug\net8.0\MyLibrary.Service.AssemblyInfoInputs.cache
+C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Service\obj\Debug\net8.0\MyLibrary.Service.AssemblyInfo.cs
+C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Service\obj\Debug\net8.0\MyLibrary.Service.csproj.CoreCompileInputs.cache
+C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Service\obj\Debug\net8.0\MyLibrary.Service.dll
+C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Service\obj\Debug\net8.0\refint\MyLibrary.Service.dll
+C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Service\obj\Debug\net8.0\MyLibrary.Service.pdb
+C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Service\obj\Debug\net8.0\ref\MyLibrary.Service.dll

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "vMJWZQatTEOcwXqAhjzr82eqc9THNJqoPL8qaxF+4dg=",
+  "Hash": "Hs0QdxadmZX+HpsXOiyaq/AfT9dPrJGQP+/IW4Yf4aE=",
   "Source": "MyLibrary",
   "BasePath": "_content/MyLibrary",
   "Mode": "Default",
@@ -31,8 +31,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "9nbia47smn",
-      "Integrity": "dVXiq+t7FwQSXyqw84DXmX/rgSFKxdKj0iQ5+K8ojWY=",
+      "Fingerprint": "br1iioi151",
+      "Integrity": "mRTgjiwo212fbsS8x/804aZcxFbnWkXRofhszFz71ZA=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\admin.css"
@@ -1531,7 +1531,7 @@
   ],
   "Endpoints": [
     {
-      "Route": "css/admin.9nbia47smn.css",
+      "Route": "css/admin.br1iioi151.css",
       "AssetFile": "C:\\Users\\sajed\\OneDrive\\שולחן העבודה\\tk project\\library_backend\\MyLibrary\\MyLibrary\\MyLibrary\\MyLibrary\\wwwroot\\css\\admin.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -1549,11 +1549,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"dVXiq+t7FwQSXyqw84DXmX/rgSFKxdKj0iQ5+K8ojWY=\""
+          "Value": "\"mRTgjiwo212fbsS8x/804aZcxFbnWkXRofhszFz71ZA=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 11 Jan 2025 12:39:03 GMT"
+          "Value": "Sat, 11 Jan 2025 19:11:35 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1563,7 +1563,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "9nbia47smn"
+          "Value": "br1iioi151"
         },
         {
           "Name": "label",
@@ -1571,7 +1571,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-dVXiq+t7FwQSXyqw84DXmX/rgSFKxdKj0iQ5+K8ojWY="
+          "Value": "sha256-mRTgjiwo212fbsS8x/804aZcxFbnWkXRofhszFz71ZA="
         }
       ]
     },
@@ -1594,11 +1594,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"dVXiq+t7FwQSXyqw84DXmX/rgSFKxdKj0iQ5+K8ojWY=\""
+          "Value": "\"mRTgjiwo212fbsS8x/804aZcxFbnWkXRofhszFz71ZA=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 11 Jan 2025 12:39:03 GMT"
+          "Value": "Sat, 11 Jan 2025 19:11:35 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1608,7 +1608,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-dVXiq+t7FwQSXyqw84DXmX/rgSFKxdKj0iQ5+K8ojWY="
+          "Value": "sha256-mRTgjiwo212fbsS8x/804aZcxFbnWkXRofhszFz71ZA="
         }
       ]
     },

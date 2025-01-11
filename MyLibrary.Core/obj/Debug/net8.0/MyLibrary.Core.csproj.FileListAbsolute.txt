@@ -53,3 +53,4 @@ C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\MyLibr
 C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\refint\MyLibrary.Core.dll
 C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\MyLibrary.Core.pdb
 C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\ref\MyLibrary.Core.dll
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary\MyLibrary.Core\obj\Debug\net8.0\MyLibrary.Core.sourcelink.json

@@ -81,3 +81,4 @@ C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\refint
 C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrary.Data.pdb
 C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrary.Data.genruntimeconfig.cache
 C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\ref\MyLibrary.Data.dll
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary\MyLibrary.Data\obj\Debug\net8.0\MyLibrary.Data.sourcelink.json

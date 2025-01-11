@@ -1711,3 +1711,4 @@ C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary\obj\Debug\net8.0\refint\MyLi
 C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary\obj\Debug\net8.0\MyLibrary.pdb
 C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary\obj\Debug\net8.0\MyLibrary.genruntimeconfig.cache
 C:\Users\fadi\Desktop\MyLibrary\MyLibrary\MyLibrary\obj\Debug\net8.0\ref\MyLibrary.dll
+C:\Users\sajed\OneDrive\שולחן העבודה\tk project\library_backend\MyLibrary\MyLibrary\MyLibrary\MyLibrary\obj\Debug\net8.0\MyLibrary.sourcelink.json
